@@ -68,11 +68,11 @@ int check_password(char* name, char* password)
 void print_all_account()
 {
     USER ptr;
-    ptr = head->next;
+    ptr = head;
     printf("name\tmoney\n");
     while(ptr)
     {
-        printf("%s\t%d\n", ptr->name, ptr->total_money);
         ptr = ptr->next;
+        printf("%s\t%d\n", ptr->name, ptr->total_money);
     }
 }
