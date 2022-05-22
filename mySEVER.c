@@ -32,7 +32,7 @@ void build_account_sever()
     scanf("%s", name);
     printf("phone:");
     scanf("%s", phone);
-    printf("birthday:");
+    printf("birthday():");
     scanf("%s", birth);
     printf("email:");
     scanf("%s", email);
