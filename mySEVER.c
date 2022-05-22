@@ -3,7 +3,7 @@
 #include <string.h>
 #include "mySEVER.h"
 #include "mySKILL.h"
-
+//test
 void build_account_sever()
 {
     char name[MAX_NAME],phone[MAX_PHONE],birth[MAX_DATE],email[MAX_EMAIL],password[MAX_PASSWORD];
