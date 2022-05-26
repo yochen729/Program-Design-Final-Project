@@ -1,24 +1,36 @@
 #ifndef mySYS_H
 #define mySYS_H
 
+#define MAX_NAME 64
+#define MAX_PHONE 16
+#define MAX_DATE 16
+#define MAX_EMAIL 64
+#define MAX_PASSWORD 64
+#define MAX_TYPE 32
+#define TRUE 1
+#define FALSE 0
+#define MAX_DATA 64
+#define MAX_LINE 512
+
+
 struct Information{
-    char ST[20];
-    char date[20];
+    char ST[MAX_TYPE]; // IMPORT FOR CREATE, IMPORT, WITHDRAW, TRANSFER, TRANSFER FROM
+    char date[MAX_DATE];
     int used_money;
     int total;
     struct Information *nt;
 };
 
-
 struct basic_account{ //personal information
-
-    char name[20],phone[20],birth[10],email[50],password[20];
+    int money;
+    char name[MAX_NAME],phone[MAX_PHONE],birth[MAX_DATE],email[MAX_EMAIL],password[MAX_PASSWORD];
     struct Information *trade;
     struct basic_account *next;
 };
 
 struct basic_account *initial(struct basic_account*);
-void my_create(struct basic_account*, char*, char *,char *,char *,int ,char *,char *);
+void my_create(struct basic_account* HEAD);
+void my_create_single(struct basic_account*, char*, char *,char *,char *,int ,char *,char *);
 void my_delete(struct basic_account*, char*);
 void my_print(struct basic_account*);
 struct basic_account *AccountCheck(struct basic_account *,char*);

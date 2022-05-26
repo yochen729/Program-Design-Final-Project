@@ -7,17 +7,13 @@ int main(){
   struct basic_account *ACCOUNT;
   ACCOUNT=initial(ACCOUNT);
   int status;
-
-  char NAME[100],PHONE[100],BIRTH[100],EMAIL[100],PASSWORD[100],DATE[100];
-  int ORIGINAL;
+  char NAME[MAX_NAME];
   while(1){
-    printf("1.create 2.delete 3.view 4.sort 5.print_account\n");
+    printf("1.create 2.delete 3.view 4.sort 5.manage account\n");
     scanf("%d",&status);
     switch(status){
         case 1:
-            printf("NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD\n");
-            scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
-            my_create(ACCOUNT,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
+            my_create(ACCOUNT);
             break;
         case 2:
             printf("Enter your name:");

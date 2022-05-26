@@ -1,7 +1,8 @@
 #include "basic.h"
 #include "mySYS.h"
 
-int num=1;
+int num = 1; // user_num = num -1
+
 struct basic_account *initial(struct basic_account *initial){
 
       initial=malloc(sizeof(struct basic_account));
@@ -15,6 +16,7 @@ struct basic_account *initial(struct basic_account *initial){
       initial->trade->total=0;
       initial->trade->nt=NULL;
       initial->next=NULL;
+      initial->money=0;
 
       return initial;
 }
@@ -32,19 +34,19 @@ struct basic_account *AccountCheck(struct basic_account *HEAD,char *name){
 int PasswordCheck(struct basic_account *HEAD,char* Name){
     struct basic_account *user;
     int times=3;
-    char p[20];
+    char p[MAX_PASSWORD];
     for(user=HEAD;user!=NULL;user=user->next){
       if(strcmp(user->name,Name)==0){
         printf("you have 3 times to enter password.\nEnter your password:");
         while(times--){
             scanf("%s",p);
             if(strcmp(p,user->password)==0){
-              return 1;
+              return TRUE;
             }
             else{
               printf("you have %d times.\n",times);
               if(times==0)
-                return 0;
+                return FALSE;
             }
         }
       }
@@ -53,7 +55,51 @@ int PasswordCheck(struct basic_account *HEAD,char* Name){
         return -1;
 
 }
-void my_create(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,char *EMAIL,int ORIGINAL,char *DATE,char *PASSWORD){
+void my_create(struct basic_account* HEAD){
+
+    printf("---1:from file 2:from stdin---\n");
+    int status;
+    char FILE_NAME[MAX_NAME];
+    char NAME[MAX_NAME],PHONE[MAX_PHONE],BIRTH[MAX_DATE],EMAIL[MAX_EMAIL],PASSWORD[MAX_PASSWORD],DATE[MAX_DATE];
+    int ORIGINAL;// initital money
+    scanf("%d",&status);
+    switch(status){
+      case 1:
+        printf("Enter your file name:\n");
+        scanf("%s",FILE_NAME);
+        FILE *fp = fopen(FILE_NAME, "r");
+        if (fp == NULL) {
+          fprintf(stderr, "File open failed.\n");
+          return;
+        }
+        char line[MAX_LINE];
+        char *data[7];
+        char *token;   
+        while (fgets(line, MAX_LINE, fp) != NULL) {
+            printf("Row: %s", line);
+            token = strtok(line, ","); 
+            for(int i=0;i<7;i++) {
+                data[i] = calloc(1, sizeof(char)*MAX_DATA);
+                strcpy(data[i], token);
+                printf("Token: %s\n", token);
+                token = strtok(NULL, ",");
+            }
+            my_create_single(HEAD, data[0], data[1], data[2], data[3], atoi(data[4]), data[5], data[6]);
+            for(int i=0;i<7;i++)  {free(data[i]);}
+        }
+        fclose(fp);
+        break;
+
+      case 2:
+        printf("NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD\n");
+        scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
+        my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
+        break;
+      default:
+        printf("invalid input.\n");
+    }
+}
+void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,char *EMAIL,int ORIGINAL,char *DATE,char *PASSWORD){
 
     struct basic_account *new_node=malloc(sizeof(struct basic_account));
     struct basic_account *list=HEAD;
@@ -66,10 +112,11 @@ void my_create(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,cha
     strcpy(new_node->password,PASSWORD);
 
     new_node->trade=malloc(sizeof(struct Information));
-    strcpy(new_node->trade->ST,"IMPORT");
+    strcpy(new_node->trade->ST,"IMPORT FOR BUILD");
     strcpy(new_node->trade->date,DATE);
     new_node->trade->used_money=ORIGINAL;
-    new_node->trade->total+=ORIGINAL;
+    new_node->trade->total=ORIGINAL;
+    new_node->money=ORIGINAL;
     new_node->trade->nt=NULL;
     list->next=new_node,
     new_node->next=NULL;
@@ -77,7 +124,7 @@ void my_create(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,cha
 
 }
 void my_delete(struct basic_account* HEAD, char *Name){
-    if(PasswordCheck(HEAD,Name)!=1) return;
+    if(PasswordCheck(HEAD,Name)!=TRUE) return;
     struct basic_account *cur,*prev;
     for(cur=HEAD,prev=NULL;cur!=NULL;prev=cur,cur=cur->next){
         if(strcmp(cur->name,Name)==0){
@@ -92,7 +139,10 @@ void my_delete(struct basic_account* HEAD, char *Name){
 void my_print(struct basic_account* HEAD){
 
     struct basic_account *first;
-    for(first=HEAD;first!=NULL;first=first->next){
+    printf("name\n");
+    first=HEAD;
+    while(first){
+        first = first->next;
         printf("%s\n",first->name);
     }
 }
@@ -100,17 +150,19 @@ void my_print_inform(struct Information *HEAD){
     struct Information *first;
     printf("YYYY/MM/DD\tRECORD\tMOENY\tTOTAL\n");
     for(first=HEAD;first!=NULL;first=first->nt){
-      printf("%s\t%s\t%d\t%d\n",first->date,first->ST,first->used_money,first->total);
+      printf("%s\t%s\t%d\t%d\n",first->date, first->ST, first->used_money, first->total);
     }
 }
 
 void MYmanage(struct basic_account* HEAD, char *Name){
-    if(PasswordCheck(HEAD,Name)!=1) return;
+    //if(PasswordCheck(HEAD,Name)!=TRUE) return;
     struct basic_account *list=AccountCheck(HEAD,Name);
     struct Information  *new_data;
     struct Information  *first=list->trade;
+    struct Information  *tail = first;
+    while(tail->nt) {tail = tail->nt;}
     int status,dollar;
-    char DAY[20];
+    char DAY[MAX_DATE];
     printf("---1:IMPORT 2:WITHDRAW 3:TRANSFER 4:PRINT_DATA---\n");
     scanf("%d",&status);
     new_data=malloc(sizeof(struct Information));
@@ -119,17 +171,19 @@ void MYmanage(struct basic_account* HEAD, char *Name){
         printf("$$\tYYYY/MM/DD\n");
         scanf("%d %s",&dollar,DAY);
         strcpy(new_data->ST,"IMPORT"),strcpy(new_data->date,DAY);
-        new_data->used_money=dollar,new_data->total+=dollar;
-        first->nt=new_data,new_data->nt=NULL;
+        new_data->used_money=dollar;
+        list->money = new_data->total = list->money + dollar;
+        tail->nt=new_data,new_data->nt=NULL;
         break;
 
       case 2://金額不足問題
         printf("$$\tYYYY/MM/DD\n");
         scanf("%d %s",&dollar,DAY);
-        if(first->total>=dollar){
+        if(list->money>=dollar){
             strcpy(new_data->ST,"WITHDRAW"),strcpy(new_data->date,DAY);
-            new_data->used_money=dollar,new_data->total-=dollar;
-            first->nt=new_data,new_data->nt=NULL;
+            new_data->used_money=dollar;
+            list->money = new_data->total = list->money - dollar;
+            tail->nt=new_data,new_data->nt=NULL;
         }
         else
             printf("you aren't enough money.\n");
@@ -138,22 +192,24 @@ void MYmanage(struct basic_account* HEAD, char *Name){
       case 3://同上
         printf("$$\tYYYY/MM/DD\n");
         scanf("%d %s",&dollar,DAY);
-        if(first->total>=dollar){
-            char given_name[20];
+        if(list->money>=dollar){
+            char given_name[MAX_NAME];
             printf("Transfer to :");
             scanf("%s",given_name);
             struct basic_account *GIVEN=AccountCheck(HEAD,given_name);
-            struct Information *GIVEN_inform=GIVEN->trade;
+            struct Information *GIVEN_inform_tail=GIVEN->trade;
+            while(GIVEN_inform_tail->nt) {GIVEN_inform_tail = GIVEN_inform_tail->nt;}
             struct Information  *new=malloc(sizeof(struct Information));
 
-
             strcpy(new_data->ST,"TRANSFER"),strcpy(new_data->date,DAY);
-            new_data->used_money=dollar,new_data->total-=dollar;
-            first->nt=new_data,new_data->nt=NULL;
+            new_data->used_money=dollar;
+            list->money = new_data->total = list->money - dollar;
+            tail->nt=new_data,new_data->nt=NULL;
 
             strcpy(new->ST,"TRANSFER FROM"),strcpy(new->date,DAY);
-            new->used_money=dollar,new->total+=dollar;
-            GIVEN_inform->nt=new,new->nt=NULL;
+            new->used_money=dollar;
+            GIVEN->money = new->total = GIVEN->money + dollar;
+            GIVEN_inform_tail->nt=new,new->nt=NULL;
         }
         else
             printf("you aren't enough money.\n");
@@ -162,7 +218,8 @@ void MYmanage(struct basic_account* HEAD, char *Name){
         my_print_inform(first);
         break;
 
-     // default:
+        default:
+          printf("invalid input.\n");
     }
 }
 
