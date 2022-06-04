@@ -9,7 +9,7 @@ int main(){
   int status;
   char NAME[MAX_NAME];
   while(1){
-    printf("1.create 2.delete 3.view 4.sort 5.manage account\n");
+    printf("1.create 2.delete 3.view 4.sort 5.trade 6.manage account\n");
     scanf("%d",&status);
     switch(status){
         case 1:
@@ -28,7 +28,12 @@ int main(){
         case 5:
             printf("Enter your name:");
             scanf("%s",NAME);
-            MYmanage(ACCOUNT,NAME);
+            my_trade(ACCOUNT,NAME);
+            break;
+        case 6:
+            printf("Enter your name:");
+            scanf("%s",NAME);
+            my_manage(ACCOUNT,NAME);
             break;
         default:
             printf("Please enter the correct information.\n");
@@ -36,6 +41,5 @@ int main(){
 
     }
   }
-
 }
 

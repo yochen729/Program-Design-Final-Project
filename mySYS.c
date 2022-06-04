@@ -76,24 +76,27 @@ void my_create(struct basic_account* HEAD){
         char *data[7];
         char *token;   
         while (fgets(line, MAX_LINE, fp) != NULL) {
-            printf("Row: %s", line);
+            // printf("Row: %s", line);
             token = strtok(line, ","); 
             for(int i=0;i<7;i++) {
                 data[i] = calloc(1, sizeof(char)*MAX_DATA);
                 strcpy(data[i], token);
-                printf("Token: %s\n", token);
+                // printf("Token: %s\n", token);
                 token = strtok(NULL, ",");
             }
+            data[6][strlen(data[6])-1] = '\0';
             my_create_single(HEAD, data[0], data[1], data[2], data[3], atoi(data[4]), data[5], data[6]);
             for(int i=0;i<7;i++)  {free(data[i]);}
         }
         fclose(fp);
+        printf("CREATE SUCCESS.\n");
         break;
 
       case 2:
-        printf("NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD\n");
+        printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD\n");
         scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
         my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
+        printf("CREATE SUCCESS.\n");
         break;
       default:
         printf("invalid input.\n");
@@ -126,10 +129,35 @@ void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PH
 void my_delete(struct basic_account* HEAD, char *Name){
     if(PasswordCheck(HEAD,Name)!=TRUE) return;
     struct basic_account *cur,*prev;
+    char file_name[MAX_NAME];
+    FILE *fp;
+    int state;
+    printf("---output deleted file? 1.YES 2.NO---");
+    scanf("%d", &state);
     for(cur=HEAD,prev=NULL;cur!=NULL;prev=cur,cur=cur->next){
         if(strcmp(cur->name,Name)==0){
             prev->next=cur->next;
-            free(cur);
+            switch (state)
+            {
+            case 1:
+              printf("Enter a name for file:");
+              scanf("%s", file_name);
+              fp = fopen(file_name, "w+");
+              if (fp == NULL) {
+                fprintf(stderr, "File open failed.\n");
+                return;
+              }
+              fprintf(fp, "NAME,BIRTH,PHONE,EMAIL,MONEY,CREATE DATE,PASSWORD\n");
+              fprintf(fp, "%s,%s,%s,%s,%d,%s,%s\n", cur->name, cur->birth, cur->phone, cur->email, cur->money, cur->trade->date, cur->password);
+              free(cur);
+              fclose(fp);
+              break;
+            case 2:
+              free(cur);
+              break;
+            default:
+              break;
+            }
             printf("DELETE SUCCESS.\n");
             num--;
             break;
@@ -141,7 +169,7 @@ void my_print(struct basic_account* HEAD){
     struct basic_account *first;
     printf("name\n");
     first=HEAD;
-    while(first){
+    while(first->next){
         first = first->next;
         printf("%s\n",first->name);
     }
@@ -154,8 +182,8 @@ void my_print_inform(struct Information *HEAD){
     }
 }
 
-void MYmanage(struct basic_account* HEAD, char *Name){
-    //if(PasswordCheck(HEAD,Name)!=TRUE) return;
+void my_trade(struct basic_account* HEAD, char *Name){
+    if(PasswordCheck(HEAD,Name)!=TRUE) return;
     struct basic_account *list=AccountCheck(HEAD,Name);
     struct Information  *new_data;
     struct Information  *first=list->trade;
@@ -163,7 +191,7 @@ void MYmanage(struct basic_account* HEAD, char *Name){
     while(tail->nt) {tail = tail->nt;}
     int status,dollar;
     char DAY[MAX_DATE];
-    printf("---1:IMPORT 2:WITHDRAW 3:TRANSFER 4:PRINT_DATA---\n");
+    printf("---1:IMPORT 2:WITHDRAW 3:TRANSFER---\n");
     scanf("%d",&status);
     new_data=malloc(sizeof(struct Information));
     switch(status){
@@ -214,12 +242,85 @@ void MYmanage(struct basic_account* HEAD, char *Name){
         else
             printf("you aren't enough money.\n");
         break;
-      case 4:
+
+        default:
+          printf("invalid input.\n");
+    }
+}
+void my_manage(struct basic_account* HEAD, char *Name)
+{
+    if(PasswordCheck(HEAD,Name)!=TRUE) return;
+    printf("---1:VIEW PERSONAL DATA  2:VIEW TRADE DATA  3:MODIFY PERSONAL DATA---\n");
+    struct basic_account *list=AccountCheck(HEAD,Name);
+    struct Information  *new_data;
+    struct Information  *first=list->trade;
+    int status;
+    scanf("%d",&status);
+    switch(status){
+      case 1:
+        printf("NAME:%s\nBIRTH:%s\nPHONE:%s\nEMAIL:%s\nPASSWORD:%s\n", list->name, list->birth, list->phone, list->email, list->password);
+        printf("DATE FOR CREATE:%s\nCURRENT REMAINING MONEY:%d\n", first->date, list->money);
+        break;
+
+      case 2:
         my_print_inform(first);
+        break;
+
+      case 3:
+        printf("---1.NAME 2.BIRTH 3.PHONE 4.EMAIL 5.PASSWORD 6.ALL---\n");
+        printf("Enter your choose:");
+        int status2;
+        char name[MAX_NAME], birth[MAX_DATE], phone[MAX_PHONE], email[MAX_EMAIL], password[MAX_PASSWORD];
+        scanf("%d",&status2);
+        switch(status2)
+        {
+          case 1:
+            printf("NAME:");
+            scanf("%s", name);
+            strcpy(list->name, name);
+            break;
+          case 2:
+            printf("BIRTH:");
+            scanf("%s", birth);
+            strcpy(list->birth, birth);
+            break;
+          case 3:
+            printf("PHONE:");
+            scanf("%s", phone);
+            strcpy(list->phone, phone);
+            break;
+          case 4:
+            printf("EMAIL:");
+            scanf("%s", email);
+            strcpy(list->email, email);
+            break;
+          case 5:
+            printf("PASSWORD:");
+            scanf("%s", password);
+            strcpy(list->password, password);
+            break;
+          case 6:
+            printf("NAME:");
+            scanf("%s", name);
+            printf("BIRTH:");
+            scanf("%s", birth);
+            printf("PHONE:");
+            scanf("%s", phone);
+            printf("EMAIL:");
+            scanf("%s", email);
+            printf("PASSWORD:");
+            scanf("%s", password);
+            strcpy(list->name, name);
+            strcpy(list->birth, birth);
+            strcpy(list->phone, phone);
+            strcpy(list->email, email);
+            strcpy(list->password, password);
+          default:
+            break;
+        }
         break;
 
         default:
           printf("invalid input.\n");
     }
 }
-

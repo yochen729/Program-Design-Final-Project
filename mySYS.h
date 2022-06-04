@@ -35,6 +35,7 @@ void my_delete(struct basic_account*, char*);
 void my_print(struct basic_account*);
 struct basic_account *AccountCheck(struct basic_account *,char*);
 int PasswordCheck(struct basic_account *,char*);
-void MYmanage(struct basic_account*, char*);
+void my_trade(struct basic_account*, char*);
+void my_manage(struct basic_account*, char*);
 
 #endif
