@@ -36,7 +36,7 @@ void my_print(struct basic_account*);
 struct basic_account *AccountCheck(struct basic_account *,char*);
 int PasswordCheck(struct basic_account *,char*);
 void my_sort(struct basic_account* );
-void Swap_name(struct basic_account* head, char* name1, char *name2);
+void Swap(struct basic_account* head, char* name1, char *name2);
 void my_trade(struct basic_account*, char*);
 void my_manage(struct basic_account*, char*);
 

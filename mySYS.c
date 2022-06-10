@@ -139,7 +139,7 @@ void my_delete(struct basic_account* HEAD, char *Name){
     char file_name[MAX_NAME];
     FILE *fp;
     int state;
-    printf("---output deleted file? 1.YES 2.NO---");
+    printf("---output deleted file? 1.YES 2.NO---\n");
     scanf("%d", &state);
     for(cur=HEAD,prev=NULL;cur!=NULL;prev=cur,cur=cur->next){
         if(strcmp(cur->name,Name)==0){
@@ -180,6 +180,27 @@ void my_print(struct basic_account* HEAD){
         first = first->next;
         printf("%s\t%d\t%s\n", first->name, first->money, first->trade->date);
     }
+    int state;
+    printf("---output file for above data? 1.YES 2.NO---\n");
+    scanf("%d", &state);
+    if(state==1){
+      char file_name[MAX_NAME];
+      FILE *fp;
+      printf("Enter a name for file:");
+      scanf("%s", file_name);
+      fp = fopen(file_name, "w+");
+      if (fp == NULL) {
+        fprintf(stderr, "File open failed.\n");
+        return;
+      }
+      fprintf(fp, "name,money,date for creating\n");
+      first=HEAD;
+      while(first->next){
+          first = first->next;
+          fprintf(fp, "%s,%d,%s\n", first->name, first->money, first->trade->date);
+      }
+      fclose(fp);
+    }
 }
 void my_print_inform(struct Information *HEAD){
     struct Information *first;
@@ -189,7 +210,7 @@ void my_print_inform(struct Information *HEAD){
     }
 }
 
-void Swap_name(struct basic_account* head, char* name1, char *name2)
+void Swap(struct basic_account* head, char* name1, char *name2)
 {
     struct basic_account *ptr,*qtr,*ptr_pre;
     for(ptr=head->next,ptr_pre=head;ptr;ptr_pre=ptr,ptr=ptr->next)
@@ -209,24 +230,55 @@ void Swap_name(struct basic_account* head, char* name1, char *name2)
 
 void my_sort(struct basic_account* head){
   //if no item in this linked list, then return.
+    struct Information  *tail1,*tail2;
+    printf("---1.name 2.money 3.date---\n");
+    int state;
+    scanf("%d", &state);
     if(head->next == NULL) return;
     //Use bubble sorting(from small to large), but replace inner for loop with while loop.
     struct basic_account* qtr;
-    for(int i=0;i<num-1;i++)
+    if(state==1 || state==2 || state==3)
     {
-        //initialize qtr
-        qtr = head->next;
-        //To make sure that qtr and qtr->next can be exchange, "qtr->next!=NULL" is necessary.
-        while(qtr->next!=NULL)
-        {
-            if(strcmp(qtr->name, qtr->next->name)>0)
-            //Because Swap() function will cause qtr=qtr->next, "qtr = qtr->next" is not necessary in this block.
-                Swap_name(head, qtr->name, qtr->next->name);
-            else
-                qtr = qtr->next;
-        }
+      for(int i=0;i<num-1;i++)
+      {
+          //initialize qtr
+          qtr = head->next;
+          //To make sure that qtr and qtr->next can be exchange, "qtr->next!=NULL" is necessary.
+          while(qtr->next!=NULL)
+          {
+              switch(state){
+                case 1: // name
+                  if(strcmp(qtr->name, qtr->next->name)>0)
+                  //Because Swap() function will cause qtr=qtr->next, "qtr = qtr->next" is not necessary in this block.
+                      Swap(head, qtr->name, qtr->next->name);
+                  else
+                      qtr = qtr->next;
+                  break;
+                case 2: // money
+                  if(qtr->money > qtr->next->money)
+                  //Because Swap() function will cause qtr=qtr->next, "qtr = qtr->next" is not necessary in this block.
+                      Swap(head, qtr->name, qtr->next->name);
+                  else
+                      qtr = qtr->next;
+                  break;
+                case 3: // date
+                  // get tail(the newest date)
+                  tail1 = qtr->trade;
+                  tail2 = qtr->next->trade;
+                  while(tail1->nt) {tail1 = tail1->nt;}
+                  while(tail2->nt) {tail2 = tail2->nt;}
+                  if(strcmp(tail1->date, tail2->date)>0)
+                  //Because Swap() function will cause qtr=qtr->next, "qtr = qtr->next" is not necessary in this block.
+                      Swap(head, qtr->name, qtr->next->name);
+                  else
+                      qtr = qtr->next;
+                  break;
+              }
+          }
+      }
     }
-    // return head;
+    else printf("invalid input.\n");
+    
 }
 
 void my_trade(struct basic_account* HEAD, char *Name){
