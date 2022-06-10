@@ -41,22 +41,32 @@ void my_trade(struct basic_account* HEAD, char *Name){
 
       case 3://同上
         printf("$$\tYYYY/MM/DD\n");
-        scanf("%d %s",&dollar,DAY);
+        scanf("%d %s",&dollar, DAY);
         if(list->money>=dollar){
             char given_name[MAX_NAME];
             printf("Transfer to :");
             scanf("%s",given_name);
+            if(strcmp(given_name, Name)==0){
+              printf("[error]you don't transfer to yourself.\n");
+              return;
+            }
             struct basic_account *GIVEN=AccountCheck(HEAD,given_name);
             struct Information *GIVEN_inform_tail=GIVEN->trade;
             while(GIVEN_inform_tail->nt) {GIVEN_inform_tail = GIVEN_inform_tail->nt;}
             struct Information  *new=malloc(sizeof(struct Information));
 
-            strcpy(new_data->ST,"TRANSFER"),strcpy(new_data->date,DAY);
+            char type1[MAX_TYPE];
+            memset(type1, 0, MAX_TYPE);
+            strcat(type1, "TRANSFER TO ");strcat(type1, given_name);
+            strcpy(new_data->ST, type1),strcpy(new_data->date,DAY);
             new_data->used_money=dollar;
             list->money = new_data->total = list->money - dollar;
             tail->nt=new_data,new_data->nt=NULL;
 
-            strcpy(new->ST,"TRANSFER FROM"),strcpy(new->date,DAY);
+            char type2[MAX_TYPE];
+            memset(type2, 0, MAX_TYPE);
+            strcat(type2, "TRANSFER FROM ");strcat(type2, list->name);
+            strcpy(new->ST,type2),strcpy(new->date,DAY);
             new->used_money=dollar;
             GIVEN->money = new->total = GIVEN->money + dollar;
             GIVEN_inform_tail->nt=new,new->nt=NULL;
