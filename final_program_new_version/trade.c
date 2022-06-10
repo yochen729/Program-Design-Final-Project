@@ -1,6 +1,7 @@
 #include "basic.h"
 #include "base_operator.h"
 #include "trade.h"
+#include "game.h"
 
 extern int num;
 
@@ -13,7 +14,7 @@ void my_trade(struct basic_account* HEAD, char *Name){
     while(tail->nt) {tail = tail->nt;}
     int status,dollar;
     char DAY[MAX_DATE];
-    printf("---1:IMPORT 2:WITHDRAW 3:TRANSFER---\n");
+    printf("---1:IMPORT 2:WITHDRAW 3:TRANSFER 4:INVEST(GAME)---\n");
     scanf("%d",&status);
     new_data=malloc(sizeof(struct Information));
     switch(status){
@@ -75,7 +76,13 @@ void my_trade(struct basic_account* HEAD, char *Name){
             printf("you aren't enough money.\n");
         break;
 
+      case 4:
+        free(new_data);
+        game_center(list);    
+        break;
+
         default:
+          free(new_data);
           printf("invalid input.\n");
     }
 }

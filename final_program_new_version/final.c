@@ -6,9 +6,9 @@
 #include "sort.h"
 #include "trade.h"
 #include "manage.h"
+#include "game.h"
 
 int main(){
-
 
   struct basic_account *ACCOUNT;
   ACCOUNT=initial(ACCOUNT);

@@ -37,8 +37,16 @@ void my_print(struct basic_account* HEAD){
 }
 void my_print_inform(struct Information *HEAD){
     struct Information *first;
-    printf("YYYY/MM/DD\tMOENY\tTOTAL\tRECORD\n");
+    printf("YYYY/MM/DD\t MOENY\t\tTOTAL\tRECORD\n");
     for(first=HEAD;first!=NULL;first=first->nt){
-      printf("%s\t%d\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+      if(first->used_money>999999){
+        printf("%s\t+%d\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+      }
+      else if(first->used_money>0){
+        printf("%s\t+%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+      }
+      else{
+        printf("%s\t%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+      }
     }
 }
