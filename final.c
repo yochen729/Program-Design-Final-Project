@@ -23,8 +23,9 @@ int main(){
         case 3:
             my_print(ACCOUNT);
             break;
-        case 4://name , money , date
-          printf("4\n");break;
+        case 4:
+            my_sort(ACCOUNT);
+            break;
         case 5:
             printf("Enter your name:");
             scanf("%s",NAME);

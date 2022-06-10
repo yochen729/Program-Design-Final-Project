@@ -84,7 +84,10 @@ void my_create(struct basic_account* HEAD){
                 // printf("Token: %s\n", token);
                 token = strtok(NULL, ",");
             }
-            data[6][strlen(data[6])-1] = '\0';
+            for(int i=0;i<strlen(data[6]);i++){
+              if(data[6][i]=='\n') data[6][i] = '\0';
+            }
+            // data[6][strlen(data[6])-1] = '\0';
             my_create_single(HEAD, data[0], data[1], data[2], data[3], atoi(data[4]), data[5], data[6]);
             for(int i=0;i<7;i++)  {free(data[i]);}
         }
@@ -109,6 +112,10 @@ void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PH
 
     for(int i=0;i<num-1;i++){
       list=list->next;
+      if(strcmp(list->name, NAME)==0){
+        printf("name:%s is used, creating is failed.\n",NAME);
+        return;
+      }
     }
     strcpy(new_node->name,NAME),strcpy(new_node->birth,BIRTH);
     strcpy(new_node->phone,PHONE),strcpy(new_node->email,EMAIL);
@@ -167,19 +174,59 @@ void my_delete(struct basic_account* HEAD, char *Name){
 void my_print(struct basic_account* HEAD){
 
     struct basic_account *first;
-    printf("name\n");
+    printf("name\tmoney\tdate for creating\n");
     first=HEAD;
     while(first->next){
         first = first->next;
-        printf("%s\n",first->name);
+        printf("%s\t%d\t%s\n", first->name, first->money, first->trade->date);
     }
 }
 void my_print_inform(struct Information *HEAD){
     struct Information *first;
-    printf("YYYY/MM/DD\tRECORD\tMOENY\tTOTAL\n");
+    printf("YYYY/MM/DD\tMOENY\tTOTAL\tRECORD\n");
     for(first=HEAD;first!=NULL;first=first->nt){
-      printf("%s\t%s\t%d\t%d\n",first->date, first->ST, first->used_money, first->total);
+      printf("%s\t%d\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
     }
+}
+
+void Swap_name(struct basic_account* head, char* name1, char *name2)
+{
+    struct basic_account *ptr,*qtr,*ptr_pre;
+    for(ptr=head->next,ptr_pre=head;ptr;ptr_pre=ptr,ptr=ptr->next)
+    {
+      if(strcmp(ptr->name,name1)==0)
+              break;
+    }
+      for(qtr=head->next;qtr;qtr=qtr->next)
+    {
+      if(strcmp(qtr->name,name2)==0)
+              break;
+    }
+    ptr->next=qtr->next;
+    ptr_pre->next=qtr;
+    qtr->next=ptr;
+}
+
+void my_sort(struct basic_account* head){
+  //if no item in this linked list, then return.
+    if(head->next == NULL) return;
+    //Use bubble sorting(from small to large), but replace inner for loop with while loop.
+    struct basic_account* qtr;
+    for(int i=0;i<num-1;i++)
+    {
+        //initialize qtr
+        qtr = head->next;
+        //To make sure that qtr and qtr->next can be exchange, "qtr->next!=NULL" is necessary.
+        while(qtr->next!=NULL)
+        {
+            if(strcmp(qtr->name, qtr->next->name)>0)
+            //Because Swap() function will cause qtr=qtr->next, "qtr = qtr->next" is not necessary in this block.
+                Swap_name(head, qtr->name, qtr->next->name);
+            else
+                qtr = qtr->next;
+        }
+    }
+    // return head;
 }
 
 void my_trade(struct basic_account* HEAD, char *Name){
