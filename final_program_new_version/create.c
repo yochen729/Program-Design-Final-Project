@@ -41,14 +41,12 @@ void my_create(struct basic_account* HEAD){
             for(int i=0;i<7;i++)  {free(data[i]);}
         }
         fclose(fp);
-        printf("CREATE SUCCESS.\n");
         break;
 
       case 2:
         printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD\n");
         scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
         my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
-        printf("CREATE SUCCESS.\n");
         break;
       default:
         printf("invalid input.\n");
@@ -80,5 +78,6 @@ void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PH
     list->next=new_node,
     new_node->next=NULL;
     num++;
+    printf("name:%s CREATE SUCCESS.\n",NAME);
 
 }
