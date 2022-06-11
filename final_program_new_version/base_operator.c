@@ -57,6 +57,7 @@ int PasswordCheck(struct basic_account *HEAD,char* Name){
 }
 
 void wait_screen(){
-  printf("Enter any to continue...\n");
-  getch();
+  system("pause");
+  // printf("Enter any to continue...\n");
+  // getch();
 }
