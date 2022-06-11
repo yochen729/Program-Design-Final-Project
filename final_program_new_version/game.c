@@ -39,7 +39,7 @@ void game_center(struct basic_account *acc)
         case 1:
 
             system("cls");
-            printf("This is the Dice game, please enter the investment amount\n");
+            printf("This is the Dice game, please enter the investment amount.\n");
             while(scanf("%d",&cost)&&cost>acc->money||cost<0){
                 if(cost == -1){
                     wait_screen();
@@ -80,17 +80,12 @@ void game_center(struct basic_account *acc)
             }
 
             printf("You now have %d.\n",acc->money);
-            int again;
-            printf("PRESS 1 TO PLAY AGAIN !!\n");
-            scanf("%d",&again);
-            if(again==1) game_center(acc);
-            wait_screen();
             break;
 
         case 2:
             
             system("cls");
-            printf("This is the Guess number game, please enter the investment amount\n");
+            printf("This is the Guess number game, please enter the investment amount.\n");
             while(scanf("%d",&cost)&&cost>acc->money||cost<0){
                 if(cost == -1){
                     wait_screen();
@@ -105,7 +100,7 @@ void game_center(struct basic_account *acc)
 
         case 3:
             system("cls");
-            printf("This is the random event game, please enter the investment amount\n");
+            printf("This is the random event game, please enter the investment amount.\n");
             while(scanf("%d",&cost)&&cost>acc->money||cost<0){
                 if(cost == -1){
                     wait_screen();
@@ -114,12 +109,121 @@ void game_center(struct basic_account *acc)
                 }
                 printf("you aren't enough money or invalid input. Please retry or type -1 to rechoose game.\n");
             }
-            printf("you will cost %d\n",cost);
+            printf("you will cost %d in a random event game.\n",cost);
             wait_screen();
+
+            int event = rand()%20+1;
+            switch(event){
+                case 1:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 2:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 3:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 4:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 5:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 6:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 7:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 8:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 9:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 10:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 11:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 12:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 13:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 14:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 15:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 16:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 17:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 18:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+                case 19:
+                    printf("event information\n");
+                    cost = 0;
+                case 20:
+                    printf("event information\n");
+                    cost = 0;
+                    break;
+            }
+
+            if(cost>0){
+                printf("You EARN %d !!\n",cost);
+            }
+            else if (cost<0){
+                printf("You Lost %d.\n",cost);
+            }
+            else{
+                printf("You not earn any money\n");
+            }
+            if(cost != 0){
+                strcpy(new_data->ST,"INVEST_DICE"),strcpy(new_data->date,DAY);
+                new_data->used_money=cost;
+                acc->money = new_data->total = acc->money + cost;
+                tail->nt=new_data,new_data->nt=NULL;
+            }
             break;
 
         default:
           free(new_data);
           printf("invalid input.\n");
+    }
+    int again;
+    printf("PRESS 1 TO PLAY AGAIN !!\n");
+    scanf("%d",&again);
+    if(again==1) {
+        wait_screen();
+        game_center(acc);
+    }
+    else{
+        wait_screen();
     }
 }
