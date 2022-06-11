@@ -12,7 +12,7 @@
 ####  4. Run the code
     Use ./bank to start our program.
 
-# 銀行系統模擬
+## 銀行系統模擬
 
 ### 功能：
 
