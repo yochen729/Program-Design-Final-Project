@@ -37,15 +37,18 @@ void game_center(struct basic_account *acc)
 
     switch(game){
         case 1:
+
             system("cls");
             printf("This is the Dice game, please enter the investment amount\n");
-            while(scanf("%d",&cost)&&cost>acc->money&&cost<=0){
-                printf("you aren't enough money. Please retry or type -1 to exit.\n");
+            while(scanf("%d",&cost)&&cost>acc->money||cost<0){
                 if(cost == -1){
                     wait_screen();
+                    game_center(acc);
                     return;
                 }
+                printf("you aren't enough money or invalid input. Please retry or type -1 to rechoose game.\n");
             }
+            printf("you will cost %d\n",cost);
             wait_screen();
             
             int dice_a,dice_b;
@@ -81,17 +84,42 @@ void game_center(struct basic_account *acc)
             printf("PRESS 1 TO PLAY AGAIN !!\n");
             scanf("%d",&again);
             if(again==1) game_center(acc);
+            wait_screen();
             break;
 
         case 2:
+            
+            system("cls");
+            printf("This is the Guess number game, please enter the investment amount\n");
+            while(scanf("%d",&cost)&&cost>acc->money||cost<0){
+                if(cost == -1){
+                    wait_screen();
+                    game_center(acc);
+                    return;
+                }
+                printf("you aren't enough money or invalid input. Please retry or type -1 to rechoose game.\n");
+            }
+            printf("you will cost %d\n",cost);
+            wait_screen();
             break;
 
         case 3:
+            system("cls");
+            printf("This is the random event game, please enter the investment amount\n");
+            while(scanf("%d",&cost)&&cost>acc->money||cost<0){
+                if(cost == -1){
+                    wait_screen();
+                    game_center(acc);
+                    return;
+                }
+                printf("you aren't enough money or invalid input. Please retry or type -1 to rechoose game.\n");
+            }
+            printf("you will cost %d\n",cost);
+            wait_screen();
             break;
 
         default:
           free(new_data);
           printf("invalid input.\n");
     }
-    wait_screen();
 }

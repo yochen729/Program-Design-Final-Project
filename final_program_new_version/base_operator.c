@@ -37,6 +37,7 @@ int PasswordCheck(struct basic_account *HEAD,char* Name){
     char p[MAX_PASSWORD];
     for(user=HEAD;user!=NULL;user=user->next){
       if(strcmp(user->name,Name)==0){
+        system("cls");
         printf("you have 3 times to enter password.\nEnter your password:");
         while(times--){
             scanf("%s",p);
@@ -44,6 +45,7 @@ int PasswordCheck(struct basic_account *HEAD,char* Name){
               return TRUE;
             }
             else{
+              system("cls");
               printf("you have %d times.\n",times);
               if(times==0)
                 return FALSE;
