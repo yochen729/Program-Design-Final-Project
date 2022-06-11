@@ -172,7 +172,7 @@ void game_center(struct basic_account *acc)
                 case 2:
                     printf("You bought a scratch-off lottery ticket but nothing get.\n");
                     strcpy(event_name, "SOLottery COST");
-                    cost = -200;
+                    cost = cost/10*5*(-1);
                     break;
                 case 3:
                     printf("You win the lottery!\n");
@@ -197,29 +197,29 @@ void game_center(struct basic_account *acc)
                 case 7:
                     printf("Become a food delivery rider, and earn some money.\n");
                     strcpy(event_name, "deliver man EARN");
-                    cost = (rand()%100+1)*((rand()%50+1)+50);
+                    cost = (rand()%100+1)*((rand()%50+1)+50) - cost;
                     break;
                 case 8:
                     printf("Become a food delivery rider, but got into a car accident.\n");
-                    cost = -15000 ;
+                    cost = -15000*(rand()%10+1) -cost;
                     break;
                 case 9:
                     printf("Become a food delivery rider, and got into a car accident but you have the car accident insurance.\n");
-                    cost = -15000 + (rand()%5+6)*2500;
+                    cost = -15000*(rand()%10+1) + (rand()%5+6)*2500 -cost;
                     break;
                 case 10:
                     printf("You are thirsty, buy some drinks.\n");
-                    cost = -50;
+                    cost = -50*(rand()%10+1);
                     strcpy(event_name, "DRINKS");
                     break;
                 case 11:
                     printf("You think Capoo is very cute, and bought many of its merch.\n");
-                    cost = -2000;
+                    cost = -2000*(rand()%10+1);
                     strcpy(event_name, "Capoo Fan COST");
                     break;
                 case 12:
                     printf("You are humgry, buy some food to eat.\n");
-                    cost = -100;
+                    cost = -100*(rand()%10+1);
                     strcpy(event_name, "FOOD");
                     break;
                 case 13:
@@ -235,12 +235,12 @@ void game_center(struct basic_account *acc)
                 case 15:
                     printf("You become a BTC miner, it cost all of your money, but earn some money.\n");
                     strcpy(event_name, "BTC miner $$");
-                    cost = cost*(-1)+rand()%10000;
+                    cost = acc->money*(-1)+(rand()%10000+1)*cost;
                     break;
                 case 16:
-                    printf("You become a BTC miner, it cost all of your money, but earn nothing.\n");
+                    printf("You become a BTC miner, it cost half of your money, but earn nothing.\n");
                     strcpy(event_name, "BTC miner nothing");
-                    cost = cost*(-1);
+                    cost = acc->money/2*(-1) + (rand()%100+1)*(rand()%10+1);
                     break;
                 case 17:
                     printf("Invest in LTC and make a fortune.\n");
@@ -254,12 +254,12 @@ void game_center(struct basic_account *acc)
                     break;
                 case 19:
                     printf("Investment in property, and earn money.\n");
-                    cost = cost + cost/(5+(rand()%5+1));
+                    cost = cost/(5+(rand()%5+1));
                     strcpy(event_name, "Property EARN");
                     break;
                 case 20:
                     printf("Investment in property, but lost money.\n");
-                    cost = cost - cost/(5+(rand()%5+1));
+                    cost = cost/(5+(rand()%5+1))*(-1);
                     strcpy(event_name, "Property LOST");
                     break;
             }
