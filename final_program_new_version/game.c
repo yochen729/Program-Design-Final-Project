@@ -113,14 +113,17 @@ void game_center(struct basic_account *acc)
             wait_screen();
 
             int event = rand()%20+1;
+            char event_name[MAX_DATA];
             switch(event){
                 case 1:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Invest in LTC and make a fortune.\n");
+                    strcpy(event_name, "LTC EARN");
+                    cost = cost*(rand()%6+1)+rand()%1000;
                     break;
                 case 2:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Invest in LTC and Lost the money.\n");
+                    strcpy(event_name, "LTC LOST");
+                    cost = cost*(rand()%2+1)*(-1)+ rand()%2*(cost/10);
                     break;
                 case 3:
                     printf("event information\n");
@@ -198,14 +201,19 @@ void game_center(struct basic_account *acc)
             if(cost>0){
                 printf("You EARN %d !!\n",cost);
             }
-            else if (cost<0){
+            else if (cost<0&&cost*(-1)<acc->money){
                 printf("You Lost %d.\n",cost);
+            }
+            else if (cost<0&&cost*(-1)>=acc->money){
+                printf("You Lost all your money.\n");
+                cost = acc->money*(-1);
             }
             else{
                 printf("You not earn any money\n");
             }
             if(cost != 0){
-                strcpy(new_data->ST,"INVEST_DICE"),strcpy(new_data->date,DAY);
+                strcpy(new_data->ST,"EVENT:"),strcpy(new_data->date,DAY);
+                strcat(new_data->ST,event_name);
                 new_data->used_money=cost;
                 acc->money = new_data->total = acc->money + cost;
                 tail->nt=new_data,new_data->nt=NULL;
@@ -220,7 +228,6 @@ void game_center(struct basic_account *acc)
     printf("PRESS 1 TO PLAY AGAIN !!\n");
     scanf("%d",&again);
     if(again==1) {
-        wait_screen();
         game_center(acc);
     }
     else{
