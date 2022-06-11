@@ -114,18 +114,18 @@ void game_center(struct basic_account *acc)
 
             int event;
             if(cost > 1000000) event = rand()%20+1; //超過100萬可以有風險更大的機會
-            else event = rand()%10+1;
+            else event = rand()%12+1;
             char event_name[MAX_DATA];
             switch(event){
                 case 1:
-                    printf("Invest in LTC and make a fortune.\n");
-                    strcpy(event_name, "LTC EARN");
-                    cost = cost*(rand()%6+1)+rand()%1000;
+                    printf("You bought a scratch-off lottery ticket and won more than 2000\n");
+                    strcpy(event_name, "SOLottery EARN");
+                    cost = 2000*(rand()%10+1);
                     break;
                 case 2:
-                    printf("Invest in LTC and Lost the money.\n");
-                    strcpy(event_name, "LTC LOST");
-                    cost = cost*(rand()%3+1)*(-1)+ rand()%2*(cost/10);
+                    printf("You bought a scratch-off lottery ticket but nothing get.\n");
+                    strcpy(event_name, "SOLottery COST");
+                    cost = -200;
                     break;
                 case 3:
                     printf("You win the lottery!\n");
@@ -138,70 +138,82 @@ void game_center(struct basic_account *acc)
                     cost = cost*(-1);
                     break;
                 case 5:
+                    printf("You invest in research, and have somere search results.\n");
+                    strcpy(event_name, "Research EARN");
+                    cost = cost+rand()%100*100;
+                    break;
+                case 6:
+                    printf("You invest in research, but nothing.\n");
+                    strcpy(event_name, "Researcher Nothing");
+                    cost = cost*(-1)+(rand()%2)*(cost/(rand()%5+1));
+                    break;
+                case 7:
+                    printf("Become a food delivery rider, and earn some money.\n");
+                    strcpy(event_name, "deliver man EARN");
+                    cost = (rand()%100+1)*((rand()%50+1)+50);
+                    break;
+                case 8:
+                    printf("Become a food delivery rider, but got into a car accident.\n");
+                    cost = -15000 ;
+                    break;
+                case 9:
+                    printf("Become a food delivery rider, and got into a car accident but you have the car accident insurance.\n");
+                    cost = -15000 + cost * (rand()%5+6)*2500;
+                    break;
+                case 10:
+                    printf("You are thirsty, buy some drinks.\n");
+                    cost = -50;
+                    strcpy(event_name, "DRINKS");
+                    break;
+                case 11:
+                    printf("You think Capoo is very cute, and bought many of its merch.\n");
+                    cost = -2000;
+                    strcpy(event_name, "Capoo Fan COST");
+                    break;
+                case 12:
+                    printf("You are humgry, buy some food to eat.\n");
+                    cost = -100;
+                    strcpy(event_name, "FOOD");
+                    break;
+                case 13:
+                    printf("Invest in LTC but Lost the money.\n");
+                    strcpy(event_name, "FUND LOST");
+                    cost = cost*(-1)+ rand()%2*(cost/10)*(-1);
+                    break;
+                case 14:
+                    printf("Invest in Mutual fund and make a fortune.\n");
+                    strcpy(event_name, "FUND EARN");
+                    cost = cost*(rand()%2+1)*(-1)+ rand()%2*(cost/10);
+                    break;
+                case 15:
                     printf("You become a BTC miner, it cost all of your money, but earn some money.\n");
                     strcpy(event_name, "BTC miner $$");
                     cost = cost*(-1)+rand()%10000;
                     break;
-                case 6:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 7:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 8:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 9:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 10:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 11:
-                    printf("Investment in property, but lost money\n");
-                    cost = cost - cost/(5+(rand()%5+1));
-                    strcpy(event_name, "Property LOST");
-                    break;
-                case 12:
-                    printf("Investment in property, and earn money\n");
-                    cost = cost + cost/(5+(rand()%5+1));
-                    strcpy(event_name, "Property EARN");
-                    break;
-                case 13:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 14:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
-                case 15:
-                    printf("event information\n");
-                    cost = 0;
-                    break;
                 case 16:
-                    printf("event information\n");
+                    printf("You become a BTC miner, it cost all of your money, but earn nothing.\n");
+                    strcpy(event_name, "BTC miner nothing");
                     cost = 0;
                     break;
                 case 17:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Invest in LTC and make a fortune.\n");
+                    strcpy(event_name, "LTC EARN");
+                    cost = cost*(rand()%6+1)+rand()%1000;
                     break;
                 case 18:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Invest in LTC but Lost the money.\n");
+                    strcpy(event_name, "LTC LOST");
+                    cost = cost*(rand()%3+1)*(-1)+ rand()%2*(cost/10);
                     break;
                 case 19:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Investment in property, and earn money.\n");
+                    cost = cost + cost/(5+(rand()%5+1));
+                    strcpy(event_name, "Property EARN");
+                    break;
                 case 20:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Investment in property, but lost money.\n");
+                    cost = cost - cost/(5+(rand()%5+1));
+                    strcpy(event_name, "Property LOST");
                     break;
             }
 
@@ -236,8 +248,5 @@ void game_center(struct basic_account *acc)
     scanf("%d",&again);
     if(again==1) {
         game_center(acc);
-    }
-    else{
-        wait_screen();
     }
 }
