@@ -16,6 +16,7 @@ int main(){
   char input[MAX_DATE];
   char NAME[MAX_NAME];
   while(1){
+    system("cls");
     printf("1.create 2.delete 3.view 4.sort 5.trade 6.manage account\n");
     scanf("%s",input);
     if(strlen(input)>1) status = 7;

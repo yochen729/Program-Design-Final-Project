@@ -5,6 +5,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include <conio.h>
+#include <windows.h>
 
 #endif
 
