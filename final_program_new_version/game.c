@@ -112,7 +112,9 @@ void game_center(struct basic_account *acc)
             printf("you will cost %d in a random event game.\n",cost);
             wait_screen();
 
-            int event = rand()%20+1;
+            int event;
+            if(cost > 1000000) event = rand()%20+1; //超過100萬可以有風險更大的機會
+            else event = rand()%10+1;
             char event_name[MAX_DATA];
             switch(event){
                 case 1:
@@ -161,12 +163,14 @@ void game_center(struct basic_account *acc)
                     cost = 0;
                     break;
                 case 11:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Investment in property, but lost money\n");
+                    cost = cost - cost/(5+(rand()%5+1));
+                    strcpy(event_name, "Property LOST");
                     break;
                 case 12:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("Investment in property, and earn money\n");
+                    cost = cost + cost/(5+(rand()%5+1));
+                    strcpy(event_name, "Property EARN");
                     break;
                 case 13:
                     printf("event information\n");
