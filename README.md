@@ -2,7 +2,11 @@
 Program Design Final Project
 
 # 目前進度
-基本功能處理完，GUI尚未使用，其他功能尚未新增
+
+1.基本功能處理完
+2.GUI尚未使用
+3.新增DICE
+4.其他...
 
 # 銀行系統模擬
 
@@ -32,7 +36,7 @@ Program Design Final Project
         -DICE
         -GUESS
         -EVENT
-        
+
 6.管理帳戶(需輸入密碼)
     -檢視帳戶個人信息
     -列出帳戶所有交易紀錄
