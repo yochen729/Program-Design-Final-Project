@@ -13,9 +13,6 @@ void game_center(struct basic_account *acc)
     char year[5],mon[3],day[3];
     char DAY[MAX_DATE];
     sprintf(DAY,"%d/%d/%d",p->tm_year+1900,p->tm_mon+1,p->tm_mday);
-    // sprintf(mon,"%d",p->tm_mon+1);
-    // sprintf(day,"%d",p->tm_mday);
-    // strcpy(DAY,year);strcat(DAY,"/");strcat(DAY,mon);strcat(DAY,"/");strcat(DAY,day);
     srand(p->tm_sec); 
     struct Information  *first= acc->trade;
     struct Information  *tail = first;
