@@ -4,7 +4,8 @@
 
 ####  1. Get clone , Git or download the source code as zip.
     Clone or download source code from Github. You can download it directly, 
-    or use a tool like Git-bash, tortoise git... 
+    or use a tool like Git-bash, tortoise git... ,
+    or download the release .exe file.
 ####  2. Go to our final_program_new_version folder
     Open the terminal and cd command to change direction to final_program_new_version folder.
 ####  3. Compile the source code.
