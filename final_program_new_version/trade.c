@@ -32,7 +32,7 @@ void my_trade(struct basic_account* HEAD, char *Name){
         scanf("%d %s",&dollar,DAY);
         if(list->money>=dollar){
             strcpy(new_data->ST,"WITHDRAW"),strcpy(new_data->date,DAY);
-            new_data->used_money=dollar;
+            new_data->used_money=dollar*(-1);
             list->money = new_data->total = list->money - dollar;
             tail->nt=new_data,new_data->nt=NULL;
         }
@@ -60,7 +60,7 @@ void my_trade(struct basic_account* HEAD, char *Name){
             memset(type1, 0, MAX_TYPE);
             strcat(type1, "TRANSFER TO ");strcat(type1, given_name);
             strcpy(new_data->ST, type1),strcpy(new_data->date,DAY);
-            new_data->used_money=dollar;
+            new_data->used_money=dollar*(-1);
             list->money = new_data->total = list->money - dollar;
             tail->nt=new_data,new_data->nt=NULL;
 
