@@ -235,7 +235,7 @@ void game_center(struct basic_account *acc)
                 case 15:
                     printf("You become a BTC miner, it cost all of your money, but earn some money.\n");
                     strcpy(event_name, "BTC miner $$");
-                    cost = acc->money*(-1)+(rand()%10000+1)*cost;
+                    cost = acc->money*(-1)+(rand()%5+1)*cost;
                     break;
                 case 16:
                     printf("You become a BTC miner, it cost half of your money, but earn nothing.\n");
