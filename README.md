@@ -1,12 +1,16 @@
 # Program-Design-Final-Project
 ##### Program Design Final Project
 
-# 目前進度
+### How to execute our program
 
-####  1.基本功能處理完
-####  2.GUI尚未使用
-####  3.新增DICE,GUESS,EVENT
-####  4.其他...
+####  1.
+    Get clone or download the resposety as zip.
+####  2.
+    Go to our final_program_new_version folder
+####  3.
+    Use terminal and type "gcc *c -o bank", then press enter to get a file.
+####  4.
+    Use ./bank to start our program.
 
 # 銀行系統模擬
 
