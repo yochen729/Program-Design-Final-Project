@@ -123,15 +123,17 @@ void game_center(struct basic_account *acc)
                 case 2:
                     printf("Invest in LTC and Lost the money.\n");
                     strcpy(event_name, "LTC LOST");
-                    cost = cost*(rand()%2+1)*(-1)+ rand()%2*(cost/10);
+                    cost = cost*(rand()%3+1)*(-1)+ rand()%2*(cost/10);
                     break;
                 case 3:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("You win the lottery!\n");
+                    strcpy(event_name, "Lottery WIN");
+                    cost = 1000000-cost;
                     break;
                 case 4:
-                    printf("event information\n");
-                    cost = 0;
+                    printf("You bought a lottery ticket, but nothing happened.\n");
+                    strcpy(event_name, "BUY Lottery");
+                    cost = cost*(-1);
                     break;
                 case 5:
                     printf("event information\n");
