@@ -134,6 +134,7 @@ void game_center(struct basic_account *acc)
             else{
                 system("cls");
                 printf("GAME OVER !!\n");
+                printf("The answer is %d.\n",answer);
                 cost = cost*(-1);
                 printf("you lost %d.\n",cost);
             }
