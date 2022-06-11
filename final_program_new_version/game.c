@@ -12,6 +12,7 @@ void game_center(struct basic_account *acc)
     struct tm *p=gmtime(&now);
     char year[5],mon[3],day[3];
     char DAY[MAX_DATE];
+    char input[MAX_DATE];
     sprintf(DAY,"%d/%d/%d",p->tm_year+1900,p->tm_mon+1,p->tm_mday);
     srand(p->tm_sec); 
     struct Information  *first= acc->trade;
@@ -19,22 +20,34 @@ void game_center(struct basic_account *acc)
     struct Information  *new_data;
     while(tail->nt) {tail = tail->nt;}
     new_data=malloc(sizeof(struct Information));
+
+    system("cls");
     printf("Welecom to the Invest Game Center\n");
     printf("Select a game to play and winnig the money !!\n");
     printf("---1.DICE 2.GUESS 3.EVENT---\n");
-    scanf("%d",&game);
+
+    while(scanf("%s",input)&&strlen(input)>1){
+        if(strcmp(input,"exit")==0){
+            wait_screen();
+            return;
+        }
+        printf("invalid input. Please retry or type ""exit"" to exit.\n");
+    }
+    game = atoi(&input[0]);
 
     switch(game){
         case 1:
+            system("cls");
             printf("This is the Dice game, please enter the investment amount\n");
             while(scanf("%d",&cost)&&cost>acc->money&&cost<=0){
                 printf("you aren't enough money. Please retry or type -1 to exit.\n");
-                if(cost = -1){
+                if(cost == -1){
                     wait_screen();
                     return;
                 }
             }
-
+            wait_screen();
+            
             int dice_a,dice_b;
             dice_a = rand()%6+1;
             dice_b = rand()%6+1;
