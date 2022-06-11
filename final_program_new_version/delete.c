@@ -5,7 +5,10 @@
 extern int num;
 
 void my_delete(struct basic_account* HEAD, char *Name){
-    if(PasswordCheck(HEAD,Name)!=TRUE) return;
+    if(PasswordCheck(HEAD,Name)!=TRUE){
+      wait_screen();
+      return;
+    }
     struct basic_account *cur,*prev;
     char file_name[MAX_NAME];
     FILE *fp;
@@ -41,4 +44,5 @@ void my_delete(struct basic_account* HEAD, char *Name){
             break;
        }
     }
+    wait_screen();
 }

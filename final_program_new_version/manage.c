@@ -7,7 +7,10 @@ extern int num;
 
 void my_manage(struct basic_account* HEAD, char *Name)
 {
-    if(PasswordCheck(HEAD,Name)!=TRUE) return;
+    if(PasswordCheck(HEAD,Name)!=TRUE){
+      wait_screen();
+      return;
+    }
     printf("---1:VIEW PERSONAL DATA  2:VIEW TRADE DATA  3:MODIFY PERSONAL DATA---\n");
     struct basic_account *list=AccountCheck(HEAD,Name);
     struct Information  *new_data;
@@ -81,4 +84,5 @@ void my_manage(struct basic_account* HEAD, char *Name)
         default:
           printf("invalid input.\n");
     }
+    wait_screen();
 }

@@ -31,5 +31,6 @@ struct basic_account{ //personal information
 struct basic_account *initial(struct basic_account*);
 struct basic_account *AccountCheck(struct basic_account *,char*);
 int PasswordCheck(struct basic_account *,char*);
+void wait_screen();
 
 #endif

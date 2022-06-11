@@ -28,7 +28,10 @@ void my_sort(struct basic_account* head){
     printf("---1.name 2.money 3.date---\n");
     int state;
     scanf("%d", &state);
-    if(head->next == NULL) return;
+    if(head->next == NULL){
+      wait_screen();
+      return;
+    }
     //Use bubble sorting(from small to large), but replace inner for loop with while loop.
     struct basic_account* qtr;
     if(state==1 || state==2 || state==3)
@@ -72,5 +75,5 @@ void my_sort(struct basic_account* head){
       }
     }
     else printf("invalid input.\n");
-    
+    wait_screen();
 }

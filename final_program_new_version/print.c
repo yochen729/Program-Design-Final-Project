@@ -27,6 +27,7 @@ void my_print(struct basic_account* HEAD){
       fp = fopen(file_name, "w+");
       if (fp == NULL) {
         fprintf(stderr, "File open failed.\n");
+        wait_screen();
         return;
       }
       fprintf(fp, "name,money,date for creating\n");
@@ -37,6 +38,7 @@ void my_print(struct basic_account* HEAD){
       }
       fclose(fp);
     }
+    wait_screen();
 }
 void my_print_inform(struct Information *HEAD){
     struct Information *first;

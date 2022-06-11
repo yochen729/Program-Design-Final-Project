@@ -19,6 +19,7 @@ void my_create(struct basic_account* HEAD){
         FILE *fp = fopen(FILE_NAME, "r");
         if (fp == NULL) {
           fprintf(stderr, "File open failed.\n");
+          wait_screen();
           return;
         }
         char line[MAX_LINE];
@@ -51,6 +52,7 @@ void my_create(struct basic_account* HEAD){
       default:
         printf("invalid input.\n");
     }
+    wait_screen();
 }
 void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,char *EMAIL,int ORIGINAL,char*DATE,char *PASSWORD){
 

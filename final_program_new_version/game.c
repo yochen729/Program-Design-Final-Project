@@ -29,7 +29,10 @@ void game_center(struct basic_account *acc)
             printf("This is the Dice game, please enter the investment amount\n");
             while(scanf("%d",&cost)&&cost>acc->money&&cost<=0){
                 printf("you aren't enough money. Please retry or type -1 to exit.\n");
-                if(cost = -1) return;
+                if(cost = -1){
+                    wait_screen();
+                    return;
+                }
             }
 
             int dice_a,dice_b;
@@ -77,4 +80,5 @@ void game_center(struct basic_account *acc)
           free(new_data);
           printf("invalid input.\n");
     }
+    wait_screen();
 }

@@ -6,7 +6,10 @@
 extern int num;
 
 void my_trade(struct basic_account* HEAD, char *Name){
-    if(PasswordCheck(HEAD,Name)!=TRUE) return;
+    if(PasswordCheck(HEAD,Name)!=TRUE){
+      wait_screen();
+      return;
+    }
     struct basic_account *list=AccountCheck(HEAD,Name);
     struct Information  *new_data;
     struct Information  *first=list->trade;
@@ -85,4 +88,5 @@ void my_trade(struct basic_account* HEAD, char *Name){
           free(new_data);
           printf("invalid input.\n");
     }
+    wait_screen();
 }
