@@ -159,7 +159,7 @@ void game_center(struct basic_account *acc)
 
             system("cls");
             int event;
-            if(cost > 1000000) event = rand()%20+1; //超過100萬可以有風險更大的機會
+            if(cost > 100000) event = rand()%8+13; //超過10萬可以有風險更大的機會
             else event = rand()%12+1;
             char event_name[MAX_DATA];
             switch(event){
