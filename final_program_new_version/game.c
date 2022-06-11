@@ -50,7 +50,7 @@ void game_center(struct basic_account *acc)
             }
             printf("you will cost %d\n",cost);
             wait_screen();
-            
+            system("cls");
             int dice_a,dice_b;
             dice_a = rand()%6+1;
             dice_b = rand()%6+1;
@@ -157,6 +157,7 @@ void game_center(struct basic_account *acc)
             printf("you will cost %d in a random event game.\n",cost);
             wait_screen();
 
+            system("cls");
             int event;
             if(cost > 1000000) event = rand()%20+1; //超過100萬可以有風險更大的機會
             else event = rand()%12+1;
@@ -262,6 +263,7 @@ void game_center(struct basic_account *acc)
                     break;
             }
 
+            wait_screen();
             if(cost>0){
                 printf("You EARN %d !!\n",cost);
             }
@@ -289,6 +291,8 @@ void game_center(struct basic_account *acc)
           printf("invalid input.\n");
     }
     int again;
+    wait_screen();
+    system("cls");
     printf("PRESS 1 TO PLAY AGAIN !!\n");
     scanf("%d",&again);
     if(again==1) {
