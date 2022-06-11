@@ -13,10 +13,13 @@ int main(){
   struct basic_account *ACCOUNT;
   ACCOUNT=initial(ACCOUNT);
   int status;
+  char input[MAX_DATE];
   char NAME[MAX_NAME];
   while(1){
     printf("1.create 2.delete 3.view 4.sort 5.trade 6.manage account\n");
-    scanf("%d",&status);
+    scanf("%s",input);
+    if(strlen(input)>1) status = 7;
+    else status = atoi(&input[0]);
     switch(status){
         case 1:
             my_create(ACCOUNT);
