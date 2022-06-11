@@ -50,7 +50,7 @@ void game_center(struct basic_account *acc)
             }
             printf("you will cost %d\n",cost);
             wait_screen();
-            
+            system("cls");
             int dice_a,dice_b;
             dice_a = rand()%6+1;
             dice_b = rand()%6+1;
@@ -97,34 +97,44 @@ void game_center(struct basic_account *acc)
             printf("you will cost %d\n",cost);
             wait_screen();
 
-            int upper = 100,lower = 1;
+            int upper = 100,lower = 0;
             int answer,times_to_guess,guess;
-            answer = rand()%100+1;
-            times_to_guess = 10;
+            answer = rand()%99+1;
+            times_to_guess = 5;
             while(times_to_guess >0){
+                
                 system("cls");
                 printf("You have %d times to guess.",times_to_guess);
                 printf("From %d to %d\n",lower,upper);
-                printf("type the number to guess for 1 to 100.\n");
-                scanf("%d",&guess);
+                printf("Type the number to guess.\n");
+                while(scanf("%d",&guess)&&(guess<=lower||guess>=upper)){
+                    printf("Please retype the number in %d to %d.\n",lower,upper);
+                }
                 if(guess>answer){
                     printf("Too Big !!\n");
+                    upper = guess;
                 }
                 else if(guess==answer){
+                    system("cls");
                     printf("Congratulation !!\n");
                     cost = cost * (rand()%4+2);
                     break;
                 }
                 else if(guess<answer){
                     printf("Too Small !!\n");
+                    lower = guess;
                 }
                 times_to_guess--;
+                wait_screen();
             }
 
             if(times_to_guess>0){
                 printf("you won the %d.\n",cost);
             }
             else{
+                system("cls");
+                printf("GAME OVER !!\n");
+                printf("The answer is %d.\n",answer);
                 cost = cost*(-1);
                 printf("you lost %d.\n",cost);
             }
@@ -148,8 +158,9 @@ void game_center(struct basic_account *acc)
             printf("you will cost %d in a random event game.\n",cost);
             wait_screen();
 
+            system("cls");
             int event;
-            if(cost > 1000000) event = rand()%20+1; //超過100萬可以有風險更大的機會
+            if(cost > 100000) event = rand()%8+13; //超過10萬可以有風險更大的機會
             else event = rand()%12+1;
             char event_name[MAX_DATA];
             switch(event){
@@ -229,7 +240,7 @@ void game_center(struct basic_account *acc)
                 case 16:
                     printf("You become a BTC miner, it cost all of your money, but earn nothing.\n");
                     strcpy(event_name, "BTC miner nothing");
-                    cost = 0;
+                    cost = cost*(-1);
                     break;
                 case 17:
                     printf("Invest in LTC and make a fortune.\n");
@@ -253,6 +264,7 @@ void game_center(struct basic_account *acc)
                     break;
             }
 
+            wait_screen();
             if(cost>0){
                 printf("You EARN %d !!\n",cost);
             }
@@ -280,6 +292,8 @@ void game_center(struct basic_account *acc)
           printf("invalid input.\n");
     }
     int again;
+    wait_screen();
+    system("cls");
     printf("PRESS 1 TO PLAY AGAIN !!\n");
     scanf("%d",&again);
     if(again==1) {
