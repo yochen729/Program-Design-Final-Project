@@ -1,7 +1,6 @@
 # Program-Design-Final-Project
-## Program Design Final Project
 
-### How to execute our program
+## How to execute our program
 
 ####  1. Get clone , Git or download the source code as zip.
     Clone or download source code from Github. You can download it directly, 
