@@ -10,6 +10,7 @@
     Open the terminal and cd command to change direction to final_program_new_version folder.
 ####  3. Compile the source code.
     Use terminal and type "gcc *c -o bank", then press enter to get a file.
+    Make sure you are using windows operatind system, because in our program we have the <conio.h>.
 ####  4. Run the code
     Use ./bank to start our program.
 
