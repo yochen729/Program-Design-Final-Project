@@ -50,8 +50,11 @@ void my_print_inform(struct Information *HEAD){
       else if(first->used_money>0){
         printf("%s\t+%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
       }
+      else if(first->used_money<-999999){
+        printf("%s\t-%d\t%d\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
+      }
       else{
-        printf("%s\t%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+        printf("%s\t-%d\t\t%d\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
       }
     }
 }

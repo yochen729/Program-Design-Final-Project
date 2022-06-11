@@ -10,6 +10,8 @@ void my_trade(struct basic_account* HEAD, char *Name){
       wait_screen();
       return;
     }
+    
+    system("cls");
     struct basic_account *list=AccountCheck(HEAD,Name);
     struct Information  *new_data;
     struct Information  *first=list->trade;

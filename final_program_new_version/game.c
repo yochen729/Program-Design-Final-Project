@@ -158,7 +158,7 @@ void game_center(struct basic_account *acc)
                     break;
                 case 9:
                     printf("Become a food delivery rider, and got into a car accident but you have the car accident insurance.\n");
-                    cost = -15000 + cost * (rand()%5+6)*2500;
+                    cost = -15000 + (rand()%5+6)*2500;
                     break;
                 case 10:
                     printf("You are thirsty, buy some drinks.\n");
