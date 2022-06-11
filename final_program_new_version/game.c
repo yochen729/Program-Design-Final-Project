@@ -96,6 +96,42 @@ void game_center(struct basic_account *acc)
             }
             printf("you will cost %d\n",cost);
             wait_screen();
+
+            int upper = 100,lower = 1;
+            int answer,times_to_guess,guess;
+            answer = rand()%100+1;
+            times_to_guess = 10;
+            while(times_to_guess >0){
+                system("cls");
+                printf("You have %d times to guess.",times_to_guess);
+                printf("From %d to %d\n",lower,upper);
+                printf("type the number to guess for 1 to 100.\n");
+                scanf("%d",&guess);
+                if(guess>answer){
+                    printf("Too Big !!\n");
+                }
+                else if(guess==answer){
+                    printf("Congratulation !!\n");
+                    cost = cost * (rand()%4+2);
+                    break;
+                }
+                else if(guess<answer){
+                    printf("Too Small !!\n");
+                }
+                times_to_guess--;
+            }
+
+            if(times_to_guess>0){
+                printf("you won the %d.\n",cost);
+            }
+            else{
+                cost = cost*(-1);
+                printf("you lost %d.\n",cost);
+            }
+            strcpy(new_data->ST,"GUESS NUMBER"),strcpy(new_data->date,DAY);
+            new_data->used_money=cost;
+            acc->money = new_data->total = acc->money + cost;
+            tail->nt=new_data,new_data->nt=NULL;
             break;
 
         case 3:
