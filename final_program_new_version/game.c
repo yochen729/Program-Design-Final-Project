@@ -97,34 +97,43 @@ void game_center(struct basic_account *acc)
             printf("you will cost %d\n",cost);
             wait_screen();
 
-            int upper = 100,lower = 1;
+            int upper = 100,lower = 0;
             int answer,times_to_guess,guess;
-            answer = rand()%100+1;
-            times_to_guess = 10;
+            answer = rand()%99+1;
+            times_to_guess = 5;
             while(times_to_guess >0){
+                
                 system("cls");
                 printf("You have %d times to guess.",times_to_guess);
                 printf("From %d to %d\n",lower,upper);
-                printf("type the number to guess for 1 to 100.\n");
-                scanf("%d",&guess);
+                printf("Type the number to guess.\n");
+                while(scanf("%d",&guess)&&(guess<=lower||guess>=upper)){
+                    printf("Please retype the number in %d to %d.\n",lower,upper);
+                }
                 if(guess>answer){
                     printf("Too Big !!\n");
+                    upper = guess;
                 }
                 else if(guess==answer){
+                    system("cls");
                     printf("Congratulation !!\n");
                     cost = cost * (rand()%4+2);
                     break;
                 }
                 else if(guess<answer){
                     printf("Too Small !!\n");
+                    lower = guess;
                 }
                 times_to_guess--;
+                wait_screen();
             }
 
             if(times_to_guess>0){
                 printf("you won the %d.\n",cost);
             }
             else{
+                system("cls");
+                printf("GAME OVER !!\n");
                 cost = cost*(-1);
                 printf("you lost %d.\n",cost);
             }
