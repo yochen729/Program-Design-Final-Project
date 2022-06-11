@@ -37,32 +37,32 @@ void my_create(struct basic_account* HEAD){
               if(data[6][i]=='\n') data[6][i] = '\0';
             }
             // data[6][strlen(data[6])-1] = '\0';
-            my_create_single(HEAD, data[0], data[1], data[2], data[3], atoi(data[4]), data[6]);
+            my_create_single(HEAD, data[0], data[1], data[2], data[3], atoi(data[4]), data[5], data[6]);
             for(int i=0;i<7;i++)  {free(data[i]);}
         }
         fclose(fp);
         break;
 
       case 2:
-        printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,PASSWORD\n");
-        scanf("%s %s %s %s %d %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,PASSWORD);
-        my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,PASSWORD);
+        printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD\n");
+        scanf("%s %s %s %s %d %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
+        my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
         break;
       default:
         printf("invalid input.\n");
     }
 }
-void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,char *EMAIL,int ORIGINAL,char *PASSWORD){
+void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PHONE,char *EMAIL,int ORIGINAL,char*DATE,char *PASSWORD){
 
     struct basic_account *new_node=malloc(sizeof(struct basic_account));
     struct basic_account *list=HEAD;
 
-    time_t now; // 變數宣告
-    time(&now); // 取得現在的日期時間
-    struct tm *p=gmtime(&now);
-    char day[MAX_DATE];
-    memset(day, 0, MAX_DATE);
-    sprintf(day, "%d/%d/%d", p->tm_year+1900, p->tm_mon+1, p->tm_mday);
+    // time_t now; // 變數宣告
+    // time(&now); // 取得現在的日期時間
+    // struct tm *p=gmtime(&now);
+    // char day[MAX_DATE];
+    // memset(day, 0, MAX_DATE);
+    // sprintf(day, "%d/%d/%d", p->tm_year+1900, p->tm_mon+1, p->tm_mday);
 
     for(int i=0;i<num-1;i++){
       list=list->next;
@@ -77,7 +77,7 @@ void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PH
 
     new_node->trade=malloc(sizeof(struct Information));
     strcpy(new_node->trade->ST,"IMPORT FOR BUILD");
-    strcpy(new_node->trade->date,day);
+    strcpy(new_node->trade->date,DATE);
     new_node->trade->used_money=ORIGINAL;
     new_node->trade->total=ORIGINAL;
     new_node->money=ORIGINAL;
