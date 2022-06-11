@@ -209,7 +209,7 @@ void game_center(struct basic_account *acc)
                 printf("You EARN %d !!\n",cost);
             }
             else if (cost<0&&cost*(-1)<acc->money){
-                printf("You Lost %d.\n",cost);
+                printf("You Lost %d.\n",cost*(-1));
             }
             else if (cost<0&&cost*(-1)>=acc->money){
                 printf("You Lost all your money.\n");
