@@ -54,6 +54,7 @@ int main(){
             break;
         default:
             printf("Please enter the correct information.\n");
+            wait_screen();
           break;
 
     }
