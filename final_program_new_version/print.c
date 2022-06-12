@@ -7,14 +7,14 @@ extern int num;
 void my_print(struct basic_account* HEAD){
 
     struct basic_account *first;
-    printf("name\tmoney\tdate for the lastest trade\n");
+    printf("name\ttotal\tdate for the lastest trade\n");
     first=HEAD;
     while(first->next){
         struct Information *tail;
         first = first->next;
         tail = first->trade;
         while(tail->nt){tail = tail->nt;}
-        printf("%s\t%d\t%s\n", first->name, first->money, tail->date);
+        printf("%s\t%d\t%s\n", first->name, first->money - first->trade->loan, tail->date);
     }
     int state;
     printf("---output file for above data? 1.YES 2.NO---\n");

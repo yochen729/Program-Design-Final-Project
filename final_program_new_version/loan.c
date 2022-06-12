@@ -18,12 +18,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
     
     if (status == 1)
     {
-        if (amount > list->money){
-            printf("you not have enough money.");
-            wait_screen();
-            return;
-        }
-        else if (amount > MAX_LOAN)
+        if (amount > MAX_LOAN)
             printf("This amount exceeds the size of preset.\n");
         else if (list->trade->loan + amount > MAX_LOAN)
             printf("Please pay off your money first.\n");
@@ -42,7 +37,12 @@ void my_loan(struct basic_account* HEAD, char *Name){
         {
             printf("You don't need to pay Off.\n");
         }
-        if (amount >= list->trade->loan)
+        else if (amount > list->money){
+            printf("you not have enough money.");
+            wait_screen();
+            return;
+        }
+        else if (amount >= list->trade->loan)
         {
             printf("All Pay Off.\n");
             printf("You Pay Off %d, remaining amount in your account is $%d.\n", list->trade->loan, list->money - list->trade->loan);
