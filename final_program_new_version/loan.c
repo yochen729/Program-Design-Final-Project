@@ -13,6 +13,12 @@ void my_loan(struct basic_account* HEAD, char *Name){
     int status;
     printf("1.Borrow\t2.Pay Off\n");
     scanf("%d", &status);
+    if (status == 2 && list->trade->loan == 0)
+    {
+        printf("You don't need to pay Off.\n");
+        wait_screen();
+        return;
+    }
     int amount;
     printf("Amount: "), scanf("%d", &amount);
     
@@ -33,14 +39,8 @@ void my_loan(struct basic_account* HEAD, char *Name){
     }
     else
     {
-        if (list->trade->loan == 0)
-        {
-            printf("You don't need to pay Off.\n");
-        }
-        else if (amount > list->money){
+        if (amount > list->money){
             printf("you not have enough money.");
-            wait_screen();
-            return;
         }
         else if (amount >= list->trade->loan)
         {
