@@ -52,7 +52,7 @@ void my_sort(struct basic_account* head){
                       qtr = qtr->next;
                   break;
                 case 2: // money
-                  if(qtr->money > qtr->next->money)
+                  if((qtr->money - qtr->trade->loan) > (qtr->next->money - qtr->next->trade->loan))
                   //Because Swap() function will cause qtr=qtr->next, "qtr = qtr->next" is not necessary in this block.
                       Swap(head, qtr->name, qtr->next->name);
                   else

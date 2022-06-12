@@ -14,6 +14,7 @@ struct basic_account *initial(struct basic_account *initial){
       strcpy(initial->trade->date,"2022/05/21");
       initial->trade->used_money=0;
       initial->trade->total=0;
+      initial->trade->loan=0;
       initial->trade->nt=NULL;
       initial->next=NULL;
       initial->money=0;

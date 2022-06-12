@@ -7,6 +7,7 @@
 #include "trade.h"
 #include "manage.h"
 #include "game.h"
+#include "loan.h"
 
 int main(){
 
@@ -17,7 +18,7 @@ int main(){
   char NAME[MAX_NAME];
   while(1){
     system("cls");
-    printf("1.create 2.delete 3.view 4.sort 5.trade 6.manage account\n");
+    printf("1.create 2.delete 3.view 4.sort 5.trade 6.loan 7.manage account\n");
     scanf("%s",input);
     if(strlen(input)>1) status = 7;
     else status = atoi(&input[0]);
@@ -42,6 +43,11 @@ int main(){
             my_trade(ACCOUNT,NAME);
             break;
         case 6:
+            printf("Enter your name:");
+            scanf("%s",NAME);
+            my_loan(ACCOUNT,NAME);
+            break;
+        case 7:
             printf("Enter your name:");
             scanf("%s",NAME);
             my_manage(ACCOUNT,NAME);

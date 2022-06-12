@@ -11,6 +11,7 @@
 #define FALSE 0
 #define MAX_DATA 64
 #define MAX_LINE 512
+#define MAX_LOAN 10000000
 
 
 struct Information{
@@ -18,6 +19,7 @@ struct Information{
     char date[MAX_DATE];
     int used_money; 
     int total;
+    int loan;
     struct Information *nt;
 };
 

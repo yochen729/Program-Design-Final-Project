@@ -34,7 +34,7 @@ void my_print(struct basic_account* HEAD){
       first=HEAD;
       while(first->next){
           first = first->next;
-          fprintf(fp, "%s,%d,%s\n", first->name, first->money, first->trade->date);
+          fprintf(fp, "%s,%d,%s\n", first->name, first->money - first->trade->loan, first->trade->date);
       }
       fclose(fp);
     }
