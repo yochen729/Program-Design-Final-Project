@@ -46,7 +46,8 @@ void my_create(struct basic_account* HEAD){
 
       case 2:
         printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD\n");
-        scanf("%s %s %s %s %d %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
+        scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
+        printf("pass word'%s'\n",PASSWORD);
         my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
         break;
       default:
@@ -84,6 +85,7 @@ void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PH
     new_node->trade->total=ORIGINAL;
     new_node->money=ORIGINAL;
     new_node->trade->nt=NULL;
+    new_node->trade->loan=0;
     list->next=new_node,
     new_node->next=NULL;
     num++;
