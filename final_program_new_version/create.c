@@ -45,9 +45,16 @@ void my_create(struct basic_account* HEAD){
         break;
 
       case 2:
-        printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD\n");
-        scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
-        printf("password is '%s', please remember.\n",PASSWORD);
+        printf("NAME:");scanf("%s",NAME);
+        printf("BIRTH:");scanf("%s",BIRTH);
+        printf("PHONE:");scanf("%s",PHONE);
+        printf("EMAIL:");scanf("%s",EMAIL);
+        printf("original money:");scanf("%d",&ORIGINAL);
+        printf("DATE:");scanf("%s",DATE);
+        printf("PASSWORD:");scanf("%s",PASSWORD);
+        // printf("NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD\n");
+        // scanf("%s %s %s %s %d %s %s",NAME,BIRTH,PHONE,EMAIL,&ORIGINAL,DATE,PASSWORD);
+        // printf("password is '%s', please remember.\n",PASSWORD);
         my_create_single(HEAD,NAME,BIRTH,PHONE,EMAIL,ORIGINAL,DATE,PASSWORD);
         break;
       default:
