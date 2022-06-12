@@ -1,5 +1,5 @@
-# Program-Design-Final-Project
-## The Simple Bank System Simulator
+# Program Design Final Project - The Simple Bank System Simulator
+
 ## How to execute our program
 
 ####  1. Get the source code
