@@ -13,10 +13,12 @@ void my_delete(struct basic_account* HEAD, char *Name){
     char file_name[MAX_NAME];
     FILE *fp;
     int state;
+    int find = FALSE;
     printf("---output deleted file? 1.YES 2.NO---\n");
     scanf("%d", &state);
     for(cur=HEAD,prev=NULL;cur!=NULL;prev=cur,cur=cur->next){
         if(strcmp(cur->name,Name)==0){
+            find == TRUE;
             prev->next=cur->next;
             switch (state)
             {
@@ -44,5 +46,6 @@ void my_delete(struct basic_account* HEAD, char *Name){
             break;
        }
     }
+    if(find==FALSE) printf("name:%s doesn't exist, DELETE DEFAULT.\n",Name);
     wait_screen();
 }
