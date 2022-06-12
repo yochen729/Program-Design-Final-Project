@@ -46,6 +46,6 @@ void my_delete(struct basic_account* HEAD, char *Name){
             break;
        }
     }
-    if(find==FALSE) printf("name:%s doesn't exist, DELETE DEFAULT.\n",Name);
+    if(find==FALSE) fprintf(stderr,"name:%s doesn't exist, DELETE DEFAULT.\n",Name);
     wait_screen();
 }

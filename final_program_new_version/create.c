@@ -77,7 +77,7 @@ void my_create_single(struct basic_account* HEAD,char *NAME,char *BIRTH,char *PH
     for(int i=0;i<num-1;i++){
       list=list->next;
       if(strcmp(list->name, NAME)==0){
-        printf("name:%s is used, creating is failed.\n",NAME);
+        fprintf(stderr,"name:%s is used, creating is failed.\n",NAME);
         return;
       }
     }
