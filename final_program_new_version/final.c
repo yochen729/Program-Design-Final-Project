@@ -20,7 +20,7 @@ int main(){
     system("cls");
     printf("1.create 2.delete 3.view 4.sort 5.trade 6.loan 7.manage account\n");
     scanf("%s",input);
-    if(strlen(input)>1) status = 7;
+    if(strlen(input)>1) status = 10;
     else status = atoi(&input[0]);
     switch(status){
         case 1:
