@@ -2,15 +2,15 @@
 
 ## How to execute our program
 
-####  1. Get clone , Git or download the source code as zip.
+####  1. Get the source code
     Clone or download source code from Github. You can download it directly, 
     or use a tool like Git-bash, tortoise git... ,
     or download the release .exe file.
 ####  2. Go to our final_program_new_version folder
-    Open the terminal and cd command to change direction to final_program_new_version folder.
-####  3. Compile the source code.
+    Open the terminal and use cd command to change direction to final_program_new_version folder.
+####  3. Compile the source code
+    Notice: Make sure you are using windows operating system, because in our program we have the <conio.h>.
     Use terminal and type "gcc *c -o bank", then press enter to get a file.
-    Make sure you are using windows operatind system, because in our program we have the <conio.h>.
 ####  4. Run the code
     Use ./bank to start our program.
 
