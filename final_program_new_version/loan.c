@@ -40,7 +40,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
     else
     {
         if (amount > list->money){
-            printf("you not have enough money.");
+            printf("you not have enough money.\n");
         }
         else if (amount >= list->trade->loan)
         {
