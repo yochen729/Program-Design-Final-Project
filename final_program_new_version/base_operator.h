@@ -15,7 +15,8 @@
 
 
 struct Information{
-    char ST[MAX_TYPE]; // IMPORT FOR CREATE, IMPORT, WITHDRAW, TRANSFER TO XX, TRANSFER FROM XX, INVEST_DICE
+    // IMPORT FOR CREATE, IMPORT, WITHDRAW, TRANSFER TO XX, TRANSFER FROM XX
+    char ST[MAX_TYPE]; 
     char date[MAX_DATE];
     int used_money; 
     int total;

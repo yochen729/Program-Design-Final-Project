@@ -54,7 +54,7 @@ int PasswordCheck(struct basic_account *HEAD,char* Name){
         }
       }
     }
-        printf("There isn't this account here.\n");
+        fprintf(stderr,"There isn't this account here.\n");
         return -1;
 
 }
