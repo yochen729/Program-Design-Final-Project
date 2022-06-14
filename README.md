@@ -2,17 +2,21 @@
 
 ## How to execute our program
 
-####  1. Get the source code
-    Clone or download source code from Github. You can download it directly, 
-    or use a tool like Git-bash, tortoise git... ,
-    or download the release .exe file.
-####  2. Go to our final_program_new_version folder
-    Open the terminal and use cd command to change direction to final_program_new_version folder.
-####  3. Compile the source code
-    Notice: Make sure you are using windows operating system, because in our program we have the <conio.h>.
-    Use terminal and type "gcc *c -o bank", then press enter to get a file.
+###  1. Get the source code
+  >Clone or download source code from Github. You can download it directly, 
+  >or use a tool like Git-bash, tortoise git... ,
+  >or download the release .exe file.
+    
+###  2. Go to our final_program_new_version folder
+ >Open the terminal and use cd command to change direction to final_program_new_version folder.
+    
+###  3. Compile the source code
+ >Notice: Make sure you are using windows operating system, because in our program we have the <conio.h> and <windows.h>.
+ >Use terminal and type "gcc *c -o bank"
+ >then press enter to get a file.
+    
 ####  4. Run the code
-    Use ./bank to start our program.
+ >Use ./bank to start our program.
 
 ## 銀行系統模擬
 
@@ -38,10 +42,8 @@
     -存款
     -提款
     -轉帳
-    -投資(GAME)
-        -DICE
-        -GUESS
-        -EVENT
+    -投資
+        -RANDOM EVENT
 
 #### 6.借貸(需輸入密碼)
     -借錢
