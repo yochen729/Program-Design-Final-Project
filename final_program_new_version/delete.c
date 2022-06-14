@@ -18,7 +18,7 @@ void my_delete(struct basic_account* HEAD, char *Name){
     scanf("%d", &state);
     for(cur=HEAD,prev=NULL;cur!=NULL;prev=cur,cur=cur->next){
         if(strcmp(cur->name,Name)==0){
-            find == TRUE;
+            find = TRUE;
             prev->next=cur->next;
             switch (state)
             {
