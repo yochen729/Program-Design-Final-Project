@@ -13,7 +13,7 @@ void game_center(struct basic_account *acc)
     char year[5],mon[3],day[3];
     char DAY[MAX_DATE];
     sprintf(DAY,"%d/%d/%d",p->tm_year+1900,p->tm_mon+1,p->tm_mday);
-    srand(p->tm_sec); 
+    srand(time(0)+rand()); 
     struct Information  *first= acc->trade;
     struct Information  *tail = first;
     struct Information  *new_data;
@@ -35,7 +35,7 @@ void game_center(struct basic_account *acc)
 
         system("cls");
         int event;
-        if(cost > 100000) event = rand()%20+1; //超過10萬可以有風險更大的機會
+        if(cost > 100000) event = rand()%18+3; //超過10萬可以有風險更大的機會
         else event = rand()%12+1;
         char event_name[MAX_DATA];
         switch(event){
@@ -72,15 +72,15 @@ void game_center(struct basic_account *acc)
                 case 7:
                     printf("Become a food delivery rider, and earn some money.\n");
                     strcpy(event_name, "deliver man EARN");
-                    cost = (rand()%100+1)*((rand()%50+1)+50) - cost;
+                    cost = (rand()%100+1)*((rand()%50+1)+50);
                     break;
                 case 8:
                     printf("Become a food delivery rider, but got into a car accident.\n");
-                    cost = -15000*(rand()%10+1) -cost;
+                    cost = -15000*(rand()%10+1);
                     break;
                 case 9:
                     printf("Become a food delivery rider, and got into a car accident but you have the car accident insurance.\n");
-                    cost = -15000*(rand()%10+1) + (rand()%5+6)*2500 -cost;
+                    cost = -15000*(rand()%10+1) + (rand()%5+6)*2500;
                     break;
                 case 10:
                     printf("You are thirsty, buy some drinks.\n");
@@ -105,7 +105,7 @@ void game_center(struct basic_account *acc)
                 case 14:
                     printf("Invest in Mutual fund and make a fortune.\n");
                     strcpy(event_name, "FUND EARN");
-                    cost = cost*(rand()%2+1)*(-1)+ rand()%2*(cost/10);
+                    cost = cost*(rand()%2+1)+ rand()%2*(cost/10);
                     break;
                 case 15:
                     printf("You become a BTC miner, it cost all of your money, but earn some money.\n");
