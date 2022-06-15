@@ -14,10 +14,18 @@ void my_print(struct basic_account* HEAD){
         first = first->next;
         tail = first->trade;
         while(tail->nt){tail = tail->nt;}
-        if(strlen(first->name)>=8)
-          printf("%s\t%d\t\t%s\n", first->name, first->money - first->trade->loan, tail->date);
-        else
-          printf("%s\t\t%d\t\t%s\n", first->name, first->money - first->trade->loan, tail->date);
+        if(strlen(first->name)>=8){
+          if(first->money - first->trade->loan>9999999)
+            printf("%s\t%d\t%s\n", first->name, first->money - first->trade->loan, tail->date);
+          else
+            printf("%s\t%d\t\t%s\n", first->name, first->money - first->trade->loan, tail->date);
+        }
+        else{
+          if(first->money - first->trade->loan>9999999)
+            printf("%s\t\t%d\t%s\n", first->name, first->money - first->trade->loan, tail->date);
+          else
+            printf("%s\t\t%d\t\t%s\n", first->name, first->money - first->trade->loan, tail->date);
+        }
     }
     int state;
     printf("---output file for above data? 1.YES 2.NO---\n");
