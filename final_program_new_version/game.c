@@ -77,10 +77,12 @@ void game_center(struct basic_account *acc)
                 case 8:
                     printf("Become a food delivery rider, but got into a car accident.\n");
                     cost = -15000*(rand()%10+1);
+                    strcpy(event_name, "Accident COST");
                     break;
                 case 9:
                     printf("Become a food delivery rider, and got into a car accident but you have the car accident insurance.\n");
                     cost = -15000*(rand()%10+1) + (rand()%5+6)*25000;
+                    strcpy(event_name, "Insurance");
                     break;
                 case 10:
                     printf("You are lucky, get the reward on a contest.\n");
