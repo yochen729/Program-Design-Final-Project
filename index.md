@@ -1,4 +1,4 @@
-# Program Design Final Project - The Simple Bank System
+# Simple Bank System
 
 ## How to execute our program
 
