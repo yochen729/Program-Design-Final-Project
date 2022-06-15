@@ -25,7 +25,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
     scanf("%d", &status);
     if (status == 2 && first->loan == 0)
     {
-        printf("You don't need to pay Off.\n");
+        printf("%s don't need to pay Off.\n", list->name);
         wait_screen();
         return;
     }
@@ -45,26 +45,26 @@ void my_loan(struct basic_account* HEAD, char *Name){
             first->nt = new_data, new_data->nt = NULL;
 
             printf("Borrow Success.\n");
-            printf("You borrow %d, so your total money is $%d.\n", amount, list->money);
+            printf("%s borrow %d, so %s's total money is $%d.\n", list->name, amount, list->name, list->money);
         }
 
     }
     else
     {
         if (amount > list->money){
-            printf("you not have enough money.\n");
+            printf("%s not have enough money.\n", list->name);
         }
         else if (amount >= first->loan)
         {
             printf("All Pay Off.\n");
-            printf("You Pay Off %d, remaining amount in your account is $%d.\n", amount, list->money - first->loan);
+            printf("%s Pay Off %d, remaining amount in %s account is $%d.\n", list->name, amount, list->name, list->money - first->loan);
             strcpy(new_data->ST, "PAYOFF"), strcpy(new_data->date, DAY);
             new_data->used_money = first->loan * (-1), new_data->loan = 0, list->money = new_data->total = first->total - first->loan;
             first->nt = new_data, new_data->nt = NULL;
         }
         else
         {
-            printf("You Pay Off %d, remaining amount in your account is $%d.\n", amount, list->money - amount);
+            printf("%s Pay Off %d, remaining amount in %s account is $%d.\n", list->name, amount, list->name, list->money - amount);
             printf("Remain $%d to pay off.\n", first->loan - amount);
             strcpy(new_data->ST, "PAYOFF"), strcpy(new_data->date, DAY);
             new_data->used_money = amount * (-1), new_data->loan = first->loan - amount, list->money = new_data->total = first->total - amount;

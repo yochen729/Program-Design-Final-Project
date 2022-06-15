@@ -28,9 +28,9 @@ void game_center(struct basic_account *acc)
             wait_screen();
             return;
         }
-        printf("you aren't enough money or invalid input. Please retry or type -1 to return.\n");
+        printf("%s not have enough money or invalid input. Please retry or type -1 to return.\n", acc->name);
     }
-    printf("you will cost %d in a invest event.\n",cost);
+    printf("%s will cost %d in a invest event.\n", acc->name,cost);
     wait_screen();
 
         system("cls");
@@ -40,32 +40,32 @@ void game_center(struct basic_account *acc)
         char event_name[MAX_DATA];
         switch(event){
                 case 1:
-                    printf("You bought a scratch-off lottery ticket and won more than 2000\n");
+                    printf("%s bought a scratch-off lottery ticket and won more than 2000\n", acc->name);
                     strcpy(event_name, "SOLottery EARN");
                     cost = 200000*(rand()%10+1);
                     break;
                 case 2:
-                    printf("You bought a scratch-off lottery ticket but nothing get.\n");
+                    printf("%s bought a scratch-off lottery ticket but nothing get.\n", acc->name);
                     strcpy(event_name, "SOLottery COST");
                     cost = cost/10*5*(-1);
                     break;
                 case 3:
-                    printf("You win the lottery!\n");
+                    printf("%s win the lottery!\n", acc->name);
                     strcpy(event_name, "Lottery WIN");
                     cost = 10000000-(cost/10*(rand()%3+5));
                     break;
                 case 4:
-                    printf("You bought a lottery ticket, but lost the lottery.\n");
+                    printf("%s bought a lottery ticket, but lost the lottery.\n", acc->name);
                     strcpy(event_name, "BUY Lottery");
                     cost = cost/100*100*(-1);
                     break;
                 case 5:
-                    printf("You invest in research, and have some research results.\n");
+                    printf("%s invest in research, and have some research results.\n", acc->name);
                     strcpy(event_name, "Research EARN");
                     cost = (rand()%10+1)*(cost/(rand()%5+1));
                     break;
                 case 6:
-                    printf("You invest in research, but nothing.\n");
+                    printf("%s invest in research, but nothing.\n", acc->name);
                     strcpy(event_name, "Researcher Nothing");
                     cost = cost*(-1)+(rand()%2)*(cost/(rand()%5+1));
                     break;
@@ -80,22 +80,22 @@ void game_center(struct basic_account *acc)
                     strcpy(event_name, "Accident COST");
                     break;
                 case 9:
-                    printf("Become a food delivery rider, and got into a car accident but you have the car accident insurance.\n");
+                    printf("Become a food delivery rider, and got into a car accident but %s have the car accident insurance.\n", acc->name);
                     cost = -15000*(rand()%10+1) + (rand()%5+6)*25000;
                     strcpy(event_name, "Insurance");
                     break;
                 case 10:
-                    printf("You are lucky, get the reward on a contest.\n");
+                    printf("%s is lucky, get the reward on a contest.\n", acc->name);
                     cost = 500000*(rand()%10+1);
                     strcpy(event_name, "DRINKS");
                     break;
                 case 11:
-                    printf("You think Capoo is very cute, and bought many of its merch.\n");
+                    printf("%s think Capoo is very cute, and bought many of its merch.\n", acc->name);
                     cost = -2000*(rand()%10+1);
                     strcpy(event_name, "Capoo Fan COST");
                     break;
                 case 12:
-                    printf("You inherit a rich man's wealth.\n");
+                    printf("%s inherit a rich man's wealth.\n", acc->name);
                     cost = 10000000*(rand()%10+1)+500000*(rand()%50+15);
                     strcpy(event_name, "FOOD");
                     break;
@@ -110,12 +110,12 @@ void game_center(struct basic_account *acc)
                     cost = cost*(rand()%2+1)+ rand()%2*(cost/10);
                     break;
                 case 15:
-                    printf("You become a BTC miner, it cost all of your money, but earn some money.\n");
+                    printf("%s become a BTC miner, it cost all of money, but earn some money.\n", acc->name);
                     strcpy(event_name, "BTC miner $$");
                     cost = acc->money*(-1)+(rand()%5+1)*cost;
                     break;
                 case 16:
-                    printf("You become a BTC miner, it cost half of your money, but earn nothing.\n");
+                    printf("%s become a BTC miner, it cost half of money, but earn nothing.\n", acc->name);
                     strcpy(event_name, "BTC miner nothing");
                     cost = acc->money/2*(-1) + (rand()%100+1)*(rand()%10+1);
                     break;
@@ -143,17 +143,17 @@ void game_center(struct basic_account *acc)
 
             wait_screen();
             if(cost>0){
-                printf("You EARN %d !!\n",cost);
+                printf("%s EARN %d !!\n", acc->name,cost);
             }
             else if (cost<0&&cost*(-1)<acc->money){
-                printf("You Lost %d.\n",cost*(-1));
+                printf("%s Lost %d.\n", acc->name,cost*(-1));
             }
             else if (cost<0&&cost*(-1)>=acc->money){
-                printf("You Lost all your money.\n");
+                printf("%s Lost all money.\n", acc->name);
                 cost = acc->money*(-1);
             }
             else{
-                printf("You not earn any money\n");
+                printf("%s not earn any money\n", acc->name);
             }
             if(cost != 0){
                 strcpy(new_data->ST,"EVENT:"),strcpy(new_data->date,DAY);
@@ -162,7 +162,7 @@ void game_center(struct basic_account *acc)
                 acc->money = new_data->total = acc->money + cost;
                 tail->nt=new_data,new_data->nt=NULL;
             }
-            printf("You now have %d.\n",acc->money);
+            printf("%s now have %d.\n", acc->name, acc->money);
 
     int again;
     wait_screen();
