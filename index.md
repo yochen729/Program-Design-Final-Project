@@ -1,18 +1,22 @@
-# Program Design Final Project - The Simple Bank System Simulator
+# Program Design Final Project - The Simple Bank System
 
 ## How to execute our program
 
-####  1. Get the source code
-    Clone or download source code from Github. You can download it directly, 
-    or use a tool like Git-bash, tortoise git... ,
-    or download the release .exe file.
-####  2. Go to our final_program_new_version folder
-    Open the terminal and use cd command to change direction to final_program_new_version folder.
-####  3. Compile the source code
-    Notice: Make sure you are using windows operating system, because in our program we have the <conio.h> and <windows.h>.
-    Use terminal and type "gcc *c -o bank", then press enter to get a file.
+###  1. Get the source code
+  >Clone or download source code from Github. You can download it directly, 
+  >or use a tool like Git-bash, tortoise git... ,
+  >or download the release .exe file.
+    
+###  2. Go to our final_program_new_version folder
+ >Open the terminal and use cd command to change direction to final_program_new_version folder.
+    
+###  3. Compile the source code
+ >Notice: Make sure you are using windows operating system, because in our program we have the <conio.h> and <windows.h>.
+ >Use terminal and type "gcc *c -o bank"
+ >then press enter to get a file.
+    
 ####  4. Run the code
-    Use ./bank to start our program.
+ >Use ./bank to start our program.
 
 ## 銀行系統模擬
 
@@ -49,42 +53,3 @@
     -檢視帳戶個人信息
     -列出帳戶所有交易紀錄
     -修改個人信息
-
-
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/yochen729/Program-Design-Final-Project/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/yochen729/Program-Design-Final-Project/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
