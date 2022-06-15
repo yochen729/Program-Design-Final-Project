@@ -63,7 +63,7 @@ void my_print_inform(struct Information *HEAD){
       // }
       if(first->used_money>999999){
         if(first->total>9999999){
-        printf("%s\t+%d\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+          printf("%s\t+%d\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
         }
         else if(first->total>0){
           printf("%s\t+%d\t%d\t\t%s\n",first->date, first->used_money, first->total, first->ST);
@@ -72,7 +72,7 @@ void my_print_inform(struct Information *HEAD){
       }
       else if(first->used_money>0){
         if(first->total>9999999){
-        printf("%s\t+%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+          printf("%s\t+%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
         }
         else if(first->total>0){
           printf("%s\t+%d\t\t%d\t\t%s\n",first->date, first->used_money, first->total, first->ST);
@@ -81,19 +81,19 @@ void my_print_inform(struct Information *HEAD){
       }
       else if(first->used_money<-999999){
         if(first->total>9999999){
-        printf("%s\t-%d\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+          printf("%s\t-%d\t%d\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
         }
         else if(first->total>0){
-          printf("%s\t-%d\t%d\t\t%s\n",first->date, first->used_money, first->total, first->ST);
+          printf("%s\t-%d\t%d\t\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
         }
         //printf("%s\t-%d\t%d\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
       }
       else{
         if(first->total>9999999){
-        printf("%s\t-%d\t\t%d\t%s\n",first->date, first->used_money, first->total, first->ST);
+        printf("%s\t-%d\t\t%d\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
         }
         else if(first->total>0){
-          printf("%s\t-%d\t\t%d\t\t%s\n",first->date, first->used_money, first->total, first->ST);
+          printf("%s\t-%d\t\t%d\t\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
         }
         //printf("%s\t-%d\t\t%d\t%s\n",first->date, first->used_money*(-1), first->total, first->ST);
       }
