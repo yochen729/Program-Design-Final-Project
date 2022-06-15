@@ -18,6 +18,7 @@ int main(){
   char NAME[MAX_NAME];
   while(1){
     system("cls");
+    printf("Welecome to the simple bank system, please choose what you want to do.\n");
     printf("1.create 2.delete 3.view 4.sort 5.trade 6.loan 7.manage account\n");
     scanf("%s",input);
     if(strlen(input)>1) status = 10;
