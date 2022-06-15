@@ -162,6 +162,7 @@ void game_center(struct basic_account *acc)
                 acc->money = new_data->total = acc->money + cost;
                 tail->nt=new_data,new_data->nt=NULL;
             }
+            printf("You now have %d.\n",acc->money);
 
     int again;
     wait_screen();
