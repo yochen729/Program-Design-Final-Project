@@ -9,6 +9,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
     }
     
     system("cls");
+    float interest = 0;
     time_t now; // 變數宣告
     time(&now); // 取得現在的日期時間
     struct tm *p=gmtime(&now);
@@ -31,7 +32,8 @@ void my_loan(struct basic_account* HEAD, char *Name){
     }
     int amount;
     printf("Amount: "), scanf("%d", &amount);
-    
+    interest = amount * 0.01;
+    int inter = (int)(interest + 0.5);
     if (status == 1)
     {
         if (amount > MAX_LOAN)
@@ -43,6 +45,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
             strcpy(new_data->ST, "BORROW"), strcpy(new_data->date, DAY);
             new_data->used_money = amount, new_data->loan = first->loan + amount, list->money = new_data->total = list->money + amount;
             first->nt = new_data, new_data->nt = NULL;
+            first->loan = first->loan + amount + inter;
 
             printf("Borrow Success.\n");
             printf("%s borrow %d, so %s's total money is $%d.\n", list->name, amount, list->name, list->money);
@@ -61,6 +64,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
             strcpy(new_data->ST, "PAYOFF"), strcpy(new_data->date, DAY);
             new_data->used_money = first->loan * (-1), new_data->loan = 0, list->money = new_data->total = first->total - first->loan;
             first->nt = new_data, new_data->nt = NULL;
+            first->loan = 0;
         }
         else
         {
@@ -69,6 +73,7 @@ void my_loan(struct basic_account* HEAD, char *Name){
             strcpy(new_data->ST, "PAYOFF"), strcpy(new_data->date, DAY);
             new_data->used_money = amount * (-1), new_data->loan = first->loan - amount, list->money = new_data->total = first->total - amount;
             first->nt = new_data, new_data->nt = NULL;
+            first->loan = first->loan - amount;
         }
 
     }
